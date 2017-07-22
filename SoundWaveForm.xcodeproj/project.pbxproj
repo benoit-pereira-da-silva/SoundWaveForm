@@ -7,13 +7,93 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E552BCD91F239FAD00A3DD4C /* BBB.mov in Resources */ = {isa = PBXBuildFile; fileRef = E552BCD81F239FAD00A3DD4C /* BBB.mov */; };
+		E552BCDA1F239FAD00A3DD4C /* BBB.mov in Resources */ = {isa = PBXBuildFile; fileRef = E552BCD81F239FAD00A3DD4C /* BBB.mov */; };
 		E5B0ECFC1F238A40005D1A58 /* SoundWaveForm.h in Headers */ = {isa = PBXBuildFile; fileRef = E5B0ECFA1F238A40005D1A58 /* SoundWaveForm.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E5B0ED5A1F238B6B005D1A58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B0ED591F238B6B005D1A58 /* AppDelegate.swift */; };
+		E5B0ED5E1F238B6B005D1A58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5B0ED5D1F238B6B005D1A58 /* Assets.xcassets */; };
+		E5B0ED611F238B6B005D1A58 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5B0ED5F1F238B6B005D1A58 /* Main.storyboard */; };
+		E5B0ED6F1F238B9D005D1A58 /* SoundWaveFormTouch.h in Headers */ = {isa = PBXBuildFile; fileRef = E5B0ED6D1F238B9D005D1A58 /* SoundWaveFormTouch.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E5B0ED7A1F238BB2005D1A58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B0ED791F238BB2005D1A58 /* AppDelegate.swift */; };
+		E5B0ED7F1F238BB2005D1A58 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5B0ED7D1F238BB2005D1A58 /* Main.storyboard */; };
+		E5B0ED811F238BB2005D1A58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5B0ED801F238BB2005D1A58 /* Assets.xcassets */; };
+		E5B0ED841F238BB2005D1A58 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5B0ED821F238BB2005D1A58 /* LaunchScreen.storyboard */; };
+		E5B0ED8B1F238C44005D1A58 /* Extractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B0ED8A1F238C44005D1A58 /* Extractor.swift */; };
+		E5B0ED8C1F238C44005D1A58 /* Extractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B0ED8A1F238C44005D1A58 /* Extractor.swift */; };
+		E5B0ED8F1F239050005D1A58 /* WaveFormDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B0ED8E1F239050005D1A58 /* WaveFormDrawer.swift */; };
+		E5B0ED901F239050005D1A58 /* WaveFormDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B0ED8E1F239050005D1A58 /* WaveFormDrawer.swift */; };
+		E5B0ED951F2397F2005D1A58 /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B0ED941F2397F2005D1A58 /* ExampleViewController.swift */; };
+		E5B0ED961F2397F2005D1A58 /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B0ED941F2397F2005D1A58 /* ExampleViewController.swift */; };
+		E5B0ED971F239D69005D1A58 /* SoundWaveForm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5B0ECF71F238A40005D1A58 /* SoundWaveForm.framework */; };
+		E5B0ED981F239D69005D1A58 /* SoundWaveForm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E5B0ECF71F238A40005D1A58 /* SoundWaveForm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E5B0ED9C1F239D71005D1A58 /* SoundWaveFormTouch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5B0ED6B1F238B9D005D1A58 /* SoundWaveFormTouch.framework */; };
+		E5B0ED9D1F239D71005D1A58 /* SoundWaveFormTouch.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E5B0ED6B1F238B9D005D1A58 /* SoundWaveFormTouch.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		E5B0ED991F239D69005D1A58 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E5B0ECEE1F238A40005D1A58 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E5B0ECF61F238A40005D1A58;
+			remoteInfo = SoundWaveForm;
+		};
+		E5B0ED9E1F239D71005D1A58 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E5B0ECEE1F238A40005D1A58 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E5B0ED6A1F238B9D005D1A58;
+			remoteInfo = SoundWaveFormTouch;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E5B0ED9B1F239D69005D1A58 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				E5B0ED981F239D69005D1A58 /* SoundWaveForm.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E5B0EDA01F239D71005D1A58 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				E5B0ED9D1F239D71005D1A58 /* SoundWaveFormTouch.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		E552BCD81F239FAD00A3DD4C /* BBB.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = BBB.mov; sourceTree = "<group>"; };
 		E5B0ECF71F238A40005D1A58 /* SoundWaveForm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SoundWaveForm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5B0ECFA1F238A40005D1A58 /* SoundWaveForm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoundWaveForm.h; sourceTree = "<group>"; };
 		E5B0ECFB1F238A40005D1A58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E5B0ED571F238B6B005D1A58 /* Example_macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example_macOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E5B0ED591F238B6B005D1A58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E5B0ED5D1F238B6B005D1A58 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E5B0ED601F238B6B005D1A58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E5B0ED621F238B6B005D1A58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E5B0ED6B1F238B9D005D1A58 /* SoundWaveFormTouch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SoundWaveFormTouch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E5B0ED6D1F238B9D005D1A58 /* SoundWaveFormTouch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoundWaveFormTouch.h; sourceTree = "<group>"; };
+		E5B0ED6E1F238B9D005D1A58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E5B0ED771F238BB2005D1A58 /* Example_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E5B0ED791F238BB2005D1A58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E5B0ED7E1F238BB2005D1A58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E5B0ED801F238BB2005D1A58 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E5B0ED831F238BB2005D1A58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E5B0ED851F238BB2005D1A58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E5B0ED8A1F238C44005D1A58 /* Extractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extractor.swift; sourceTree = "<group>"; };
+		E5B0ED8E1F239050005D1A58 /* WaveFormDrawer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveFormDrawer.swift; sourceTree = "<group>"; };
+		E5B0ED941F2397F2005D1A58 /* ExampleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -24,13 +104,41 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E5B0ED541F238B6B005D1A58 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E5B0ED971F239D69005D1A58 /* SoundWaveForm.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E5B0ED671F238B9D005D1A58 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E5B0ED741F238BB2005D1A58 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E5B0ED9C1F239D71005D1A58 /* SoundWaveFormTouch.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		E5B0ECED1F238A40005D1A58 = {
 			isa = PBXGroup;
 			children = (
+				E5B0ED891F238C24005D1A58 /* Sources */,
 				E5B0ECF91F238A40005D1A58 /* SoundWaveForm */,
+				E5B0ED6C1F238B9D005D1A58 /* SoundWaveFormTouch */,
+				E5B0ED8D1F238F54005D1A58 /* SharedAssets */,
+				E5B0ED581F238B6B005D1A58 /* Example_macOS */,
+				E5B0ED781F238BB2005D1A58 /* Example_iOS */,
 				E5B0ECF81F238A40005D1A58 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -39,6 +147,9 @@
 			isa = PBXGroup;
 			children = (
 				E5B0ECF71F238A40005D1A58 /* SoundWaveForm.framework */,
+				E5B0ED571F238B6B005D1A58 /* Example_macOS.app */,
+				E5B0ED6B1F238B9D005D1A58 /* SoundWaveFormTouch.framework */,
+				E5B0ED771F238BB2005D1A58 /* Example_iOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -52,6 +163,56 @@
 			path = SoundWaveForm;
 			sourceTree = "<group>";
 		};
+		E5B0ED581F238B6B005D1A58 /* Example_macOS */ = {
+			isa = PBXGroup;
+			children = (
+				E5B0ED591F238B6B005D1A58 /* AppDelegate.swift */,
+				E5B0ED5D1F238B6B005D1A58 /* Assets.xcassets */,
+				E5B0ED5F1F238B6B005D1A58 /* Main.storyboard */,
+				E5B0ED621F238B6B005D1A58 /* Info.plist */,
+			);
+			path = Example_macOS;
+			sourceTree = "<group>";
+		};
+		E5B0ED6C1F238B9D005D1A58 /* SoundWaveFormTouch */ = {
+			isa = PBXGroup;
+			children = (
+				E5B0ED6D1F238B9D005D1A58 /* SoundWaveFormTouch.h */,
+				E5B0ED6E1F238B9D005D1A58 /* Info.plist */,
+			);
+			path = SoundWaveFormTouch;
+			sourceTree = SOURCE_ROOT;
+		};
+		E5B0ED781F238BB2005D1A58 /* Example_iOS */ = {
+			isa = PBXGroup;
+			children = (
+				E5B0ED791F238BB2005D1A58 /* AppDelegate.swift */,
+				E5B0ED7D1F238BB2005D1A58 /* Main.storyboard */,
+				E5B0ED801F238BB2005D1A58 /* Assets.xcassets */,
+				E5B0ED821F238BB2005D1A58 /* LaunchScreen.storyboard */,
+				E5B0ED851F238BB2005D1A58 /* Info.plist */,
+			);
+			path = Example_iOS;
+			sourceTree = "<group>";
+		};
+		E5B0ED891F238C24005D1A58 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				E5B0ED8A1F238C44005D1A58 /* Extractor.swift */,
+				E5B0ED8E1F239050005D1A58 /* WaveFormDrawer.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		E5B0ED8D1F238F54005D1A58 /* SharedAssets */ = {
+			isa = PBXGroup;
+			children = (
+				E552BCD81F239FAD00A3DD4C /* BBB.mov */,
+				E5B0ED941F2397F2005D1A58 /* ExampleViewController.swift */,
+			);
+			path = SharedAssets;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -60,6 +221,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				E5B0ECFC1F238A40005D1A58 /* SoundWaveForm.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E5B0ED681F238B9D005D1A58 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E5B0ED6F1F238B9D005D1A58 /* SoundWaveFormTouch.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,16 +253,90 @@
 			productReference = E5B0ECF71F238A40005D1A58 /* SoundWaveForm.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		E5B0ED561F238B6B005D1A58 /* Example_macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E5B0ED631F238B6B005D1A58 /* Build configuration list for PBXNativeTarget "Example_macOS" */;
+			buildPhases = (
+				E5B0ED531F238B6B005D1A58 /* Sources */,
+				E5B0ED541F238B6B005D1A58 /* Frameworks */,
+				E5B0ED551F238B6B005D1A58 /* Resources */,
+				E5B0ED9B1F239D69005D1A58 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E5B0ED9A1F239D69005D1A58 /* PBXTargetDependency */,
+			);
+			name = Example_macOS;
+			productName = Example_macOS;
+			productReference = E5B0ED571F238B6B005D1A58 /* Example_macOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E5B0ED6A1F238B9D005D1A58 /* SoundWaveFormTouch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E5B0ED701F238B9D005D1A58 /* Build configuration list for PBXNativeTarget "SoundWaveFormTouch" */;
+			buildPhases = (
+				E5B0ED661F238B9D005D1A58 /* Sources */,
+				E5B0ED671F238B9D005D1A58 /* Frameworks */,
+				E5B0ED681F238B9D005D1A58 /* Headers */,
+				E5B0ED691F238B9D005D1A58 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SoundWaveFormTouch;
+			productName = SoundWaveFormTouch;
+			productReference = E5B0ED6B1F238B9D005D1A58 /* SoundWaveFormTouch.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		E5B0ED761F238BB2005D1A58 /* Example_iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E5B0ED861F238BB2005D1A58 /* Build configuration list for PBXNativeTarget "Example_iOS" */;
+			buildPhases = (
+				E5B0ED731F238BB2005D1A58 /* Sources */,
+				E5B0ED741F238BB2005D1A58 /* Frameworks */,
+				E5B0ED751F238BB2005D1A58 /* Resources */,
+				E5B0EDA01F239D71005D1A58 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E5B0ED9F1F239D71005D1A58 /* PBXTargetDependency */,
+			);
+			name = Example_iOS;
+			productName = Example_iOS;
+			productReference = E5B0ED771F238BB2005D1A58 /* Example_iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		E5B0ECEE1F238A40005D1A58 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Pereira da Silva";
 				TargetAttributes = {
 					E5B0ECF61F238A40005D1A58 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 984ZD3F8L6;
+						LastSwiftMigration = 0830;
+						ProvisioningStyle = Automatic;
+					};
+					E5B0ED561F238B6B005D1A58 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 984ZD3F8L6;
+						ProvisioningStyle = Automatic;
+					};
+					E5B0ED6A1F238B9D005D1A58 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 984ZD3F8L6;
+						LastSwiftMigration = 0830;
+						ProvisioningStyle = Automatic;
+					};
+					E5B0ED761F238BB2005D1A58 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 984ZD3F8L6;
 						ProvisioningStyle = Automatic;
@@ -106,6 +349,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = E5B0ECED1F238A40005D1A58;
 			productRefGroup = E5B0ECF81F238A40005D1A58 /* Products */;
@@ -113,6 +357,9 @@
 			projectRoot = "";
 			targets = (
 				E5B0ECF61F238A40005D1A58 /* SoundWaveForm */,
+				E5B0ED561F238B6B005D1A58 /* Example_macOS */,
+				E5B0ED6A1F238B9D005D1A58 /* SoundWaveFormTouch */,
+				E5B0ED761F238BB2005D1A58 /* Example_iOS */,
 			);
 		};
 /* End PBXProject section */
@@ -125,6 +372,34 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E5B0ED551F238B6B005D1A58 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E552BCD91F239FAD00A3DD4C /* BBB.mov in Resources */,
+				E5B0ED5E1F238B6B005D1A58 /* Assets.xcassets in Resources */,
+				E5B0ED611F238B6B005D1A58 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E5B0ED691F238B9D005D1A58 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E5B0ED751F238BB2005D1A58 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E5B0ED841F238BB2005D1A58 /* LaunchScreen.storyboard in Resources */,
+				E5B0ED811F238BB2005D1A58 /* Assets.xcassets in Resources */,
+				E5B0ED7F1F238BB2005D1A58 /* Main.storyboard in Resources */,
+				E552BCDA1F239FAD00A3DD4C /* BBB.mov in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -132,10 +407,79 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5B0ED8F1F239050005D1A58 /* WaveFormDrawer.swift in Sources */,
+				E5B0ED8B1F238C44005D1A58 /* Extractor.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E5B0ED531F238B6B005D1A58 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E5B0ED951F2397F2005D1A58 /* ExampleViewController.swift in Sources */,
+				E5B0ED5A1F238B6B005D1A58 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E5B0ED661F238B9D005D1A58 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E5B0ED901F239050005D1A58 /* WaveFormDrawer.swift in Sources */,
+				E5B0ED8C1F238C44005D1A58 /* Extractor.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E5B0ED731F238BB2005D1A58 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E5B0ED961F2397F2005D1A58 /* ExampleViewController.swift in Sources */,
+				E5B0ED7A1F238BB2005D1A58 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E5B0ED9A1F239D69005D1A58 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E5B0ECF61F238A40005D1A58 /* SoundWaveForm */;
+			targetProxy = E5B0ED991F239D69005D1A58 /* PBXContainerItemProxy */;
+		};
+		E5B0ED9F1F239D71005D1A58 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E5B0ED6A1F238B9D005D1A58 /* SoundWaveFormTouch */;
+			targetProxy = E5B0ED9E1F239D71005D1A58 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		E5B0ED5F1F238B6B005D1A58 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E5B0ED601F238B6B005D1A58 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		E5B0ED7D1F238BB2005D1A58 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E5B0ED7E1F238BB2005D1A58 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		E5B0ED821F238BB2005D1A58 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E5B0ED831F238BB2005D1A58 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		E5B0ECFD1F238A40005D1A58 /* Debug */ = {
@@ -239,6 +583,30 @@
 		E5B0ED001F238A40005D1A58 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 984ZD3F8L6;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = SoundWaveForm/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.pereira-da-silva.SoundWaveForm";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		E5B0ED011F238A40005D1A58 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -255,26 +623,122 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 			};
-			name = Debug;
+			name = Release;
 		};
-		E5B0ED011F238A40005D1A58 /* Release */ = {
+		E5B0ED641F238B6B005D1A58 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 984ZD3F8L6;
+				INFOPLIST_FILE = Example_macOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.pereira-da-silva.Example-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		E5B0ED651F238B6B005D1A58 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 984ZD3F8L6;
+				INFOPLIST_FILE = Example_macOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.pereira-da-silva.Example-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		E5B0ED711F238B9D005D1A58 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 984ZD3F8L6;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = SoundWaveForm/Info.plist;
+				INFOPLIST_FILE = SoundWaveFormTouch/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.pereira-da-silva.SoundWaveForm";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.pereira-da-silva.SoundWaveFormTouch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E5B0ED721F238B9D005D1A58 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 984ZD3F8L6;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = SoundWaveFormTouch/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.pereira-da-silva.SoundWaveFormTouch";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E5B0ED871F238BB2005D1A58 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 984ZD3F8L6;
+				INFOPLIST_FILE = Example_iOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.pereira-da-silva.Example-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E5B0ED881F238BB2005D1A58 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 984ZD3F8L6;
+				INFOPLIST_FILE = Example_iOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.pereira-da-silva.Example-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -297,6 +761,34 @@
 				E5B0ED011F238A40005D1A58 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E5B0ED631F238B6B005D1A58 /* Build configuration list for PBXNativeTarget "Example_macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E5B0ED641F238B6B005D1A58 /* Debug */,
+				E5B0ED651F238B6B005D1A58 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E5B0ED701F238B9D005D1A58 /* Build configuration list for PBXNativeTarget "SoundWaveFormTouch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E5B0ED711F238B9D005D1A58 /* Debug */,
+				E5B0ED721F238B9D005D1A58 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E5B0ED861F238BB2005D1A58 /* Build configuration list for PBXNativeTarget "Example_iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E5B0ED871F238BB2005D1A58 /* Debug */,
+				E5B0ED881F238BB2005D1A58 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
