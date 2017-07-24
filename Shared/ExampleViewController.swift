@@ -63,7 +63,7 @@ public class ExampleViewController: UniversalViewController {
                                                           position: .middle,
                                                           scale: 1,
                                                           borderWidth:0,
-                                                          borderColor:WaveColor.black)
+                                                          borderColor:WaveColor.red)
 
                 let drawingStartTime = CFAbsoluteTimeGetCurrent()
                 self.waveFormView.image = WaveFormDrawer.image(from: samples, with: configuration)

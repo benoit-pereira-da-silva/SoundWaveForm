@@ -198,8 +198,7 @@ open class WaveFormDrawer {
     private static func _drawBorder(on context: CGContext, with configuration: WaveformConfiguration) {
         let path = CGMutablePath()
         let radius:CGFloat = 0
-        let inset = configuration.borderWidth
-        let rect = CGRect(origin: CGPoint.zero, size: configuration.size).insetBy(dx:inset, dy:inset)
+        let rect = CGRect(origin: CGPoint.zero, size: configuration.size)
         context.setStrokeColor(configuration.borderColor.cgColor)
         context.setLineWidth(configuration.borderWidth)
         path.move(to:CGPoint(x:  rect.minX, y:  rect.maxY))
