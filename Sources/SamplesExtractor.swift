@@ -8,7 +8,6 @@
 //
 //  https://github.com/fulldecent/FDWaveformView 
 //  https://github.com/dmrschmidt/DSWaveformImage
-//  https://github.com/JagieChen/SFAudioWaveformHelper/
 //
 //  Created by Benoit Pereira da silva on 22/07/2017. https://pereira-da-silva.com
 //  Copyright © 2017 Pereira da Silva. All rights reserved.

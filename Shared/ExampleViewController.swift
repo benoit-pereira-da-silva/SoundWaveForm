@@ -13,25 +13,25 @@ import AVFoundation
     import SoundWaveForm
     public typealias UniversalViewController = NSViewController
     public typealias UniversalImageView = NSImageView
+      public typealias UniversalLabel = NSTextField
 #elseif os(iOS)
     import UIKit
     import SoundWaveFormTouch
     public typealias UniversalViewController = UIViewController
-    public typealias UniversalImageView = UImageView
+    public typealias UniversalImageView = UIImageView
+    public typealias UniversalLabel = UILabel
 #endif
-
 
 
 public class ExampleViewController: UniversalViewController {
 
     @IBOutlet weak var waveFormView: UniversalImageView!
 
+    @IBOutlet weak var nbLabel: UniversalLabel!
 
-    @IBOutlet weak var nbLabel: NSTextField!
+    @IBOutlet weak var samplingDurationLabel: UniversalLabel!
 
-    @IBOutlet weak var samplingDurationLabel: NSTextField!
-
-    @IBOutlet weak var drawingDurationLabel: NSTextField!
+    @IBOutlet weak var drawingDurationLabel: UniversalLabel!
 
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -58,17 +58,23 @@ public class ExampleViewController: UniversalViewController {
                 // Let's draw the sample into an image.
                 let configuration = WaveformConfiguration(size: waveFormView.bounds.size,
                                                           color: WaveColor.red,
-                                                          style: .gradient,
+                                                          style: .striped,
                                                           position: .middle,
                                                           scale: 1)
                 let drawingStartTime = CFAbsoluteTimeGetCurrent()
                 self.waveFormView.image = WaveFormDrawer.image(from: samples, with: configuration)
                 let drawingDuration = CFAbsoluteTimeGetCurrent() - drawingStartTime
 
-                // Display the nb of samples
-                self.nbLabel.stringValue = "\(width)/\(samples.count)"
-                self.samplingDurationLabel.stringValue = String(format:"%.3f s",samplingDuration)
-                self.drawingDurationLabel.stringValue = String(format:"%.3f s",drawingDuration)
+                // Display the nb of samples, and the processing durations
+                #if os(OSX)
+                    self.nbLabel.stringValue = "\(width)/\(samples.count)"
+                    self.samplingDurationLabel.stringValue = String(format:"%.3f s",samplingDuration)
+                    self.drawingDurationLabel.stringValue = String(format:"%.3f s",drawingDuration)
+                #elseif os(iOS)
+                    self.nbLabel.text = "\(width)/\(samples.count)"
+                    self.samplingDurationLabel.text = String(format:"%.3f s",samplingDuration)
+                    self.drawingDurationLabel.text = String(format:"%.3f s",drawingDuration)
+                #endif
             }catch{
                 print("\(error)")
             }

@@ -28,16 +28,16 @@ import AVFoundation
     public typealias WaveColor = UIColor
     var mainScreenScale = UIScreen.main.scale
 
-    extension Color {
+    extension WaveColor {
 
         // Cocoa Touch to Cocoa adaptation
-        func highlight(withLevel: CGFloat) -> Color? {
+        func highlight(withLevel: CGFloat) -> WaveColor? {
             var hue: CGFloat = 0.0, saturation: CGFloat = 0.0, brightness: CGFloat = 0.0, alpha: CGFloat = 0.0
             self.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
             let brightnessAdjustment: CGFloat = withLevel
             let adjustmentModifier: CGFloat = brightness < brightnessAdjustment ? 1 : -1
             let newBrightness = brightness + brightnessAdjustment * adjustmentModifier
-            return Color(hue: hue, saturation: saturation, brightness: newBrightness, alpha: alpha)
+            return WaveColor(hue: hue, saturation: saturation, brightness: newBrightness, alpha: alpha)
         }
     }
 
@@ -161,8 +161,8 @@ open class WaveFormDrawer {
             context.setAllowsAntialiasing(true)
             context.setShouldAntialias(true)
 
-            self.drawBackground(on: context, with: configuration)
-            self.drawGraph(from: samples, on: context, with: configuration)
+            self._drawBackground(on: context, with: configuration)
+            self._drawGraph(from: samples, on: context, with: configuration)
 
             let graphImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()

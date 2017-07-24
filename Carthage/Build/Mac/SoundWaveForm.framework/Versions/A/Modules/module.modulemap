@@ -1,0 +1,10 @@
+framework module SoundWaveForm {
+  umbrella header "SoundWaveForm.h"
+
+  export *
+  module * { export * }
+}
+
+module SoundWaveForm.Swift {
+    header "SoundWaveForm-Swift.h"
+}
