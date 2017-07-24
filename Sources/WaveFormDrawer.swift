@@ -69,7 +69,7 @@ public enum WaveformPosition: Int {
 public enum WaveformStyle{
     case filled
     case gradient
-    case striped
+    case striped(period:Int)
 }
 
 
@@ -231,10 +231,17 @@ open class WaveFormDrawer {
             let drawingAmplitudeUp = positionAdjustedGraphCenter - drawingAmplitude
             let drawingAmplitudeDown = positionAdjustedGraphCenter + drawingAmplitude
             maxAmplitude = max(drawingAmplitude, maxAmplitude)
+            switch configuration.style {
+            case .striped(let period):
+                  if (Int(xPos) % period == 0) {
+                    path.move(to: CGPoint(x: xPos, y: drawingAmplitudeUp))
+                    path.addLine(to: CGPoint(x: xPos, y: drawingAmplitudeDown))
+                  }
+            default:
+                path.move(to: CGPoint(x: xPos, y: drawingAmplitudeUp))
+                path.addLine(to: CGPoint(x: xPos, y: drawingAmplitudeDown))
+            }
 
-            if configuration.style == .striped && (Int(xPos) % 5 != 0) { continue }
-            path.move(to: CGPoint(x: xPos, y: drawingAmplitudeUp))
-            path.addLine(to: CGPoint(x: xPos, y: drawingAmplitudeDown))
         }
         context.addPath(path)
 

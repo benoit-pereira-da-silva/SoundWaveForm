@@ -59,7 +59,7 @@ public class ExampleViewController: UniversalViewController {
                 let configuration = WaveformConfiguration(size: waveFormView.bounds.size,
                                                           color: WaveColor.red,
                                                           backgroundColor:WaveColor.clear,
-                                                          style: .striped,
+                                                          style: .striped(period:3),
                                                           position: .middle,
                                                           scale: 1,
                                                           borderWidth:0,
