@@ -29,6 +29,9 @@ public class ExampleViewController: UniversalViewController {
 
     @IBOutlet weak var nbLabel: NSTextField!
 
+    @IBOutlet weak var samplingDurationLabel: NSTextField!
+
+    @IBOutlet weak var drawingDurationLabel: NSTextField!
 
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -40,16 +43,17 @@ public class ExampleViewController: UniversalViewController {
         if let track:AVAssetTrack = audioTracks.first{
             guard let asset = track.asset else { return }
             do{
-                let timeRange = CMTimeRangeMake(CMTime(seconds: 5, preferredTimescale: 1000), CMTime(seconds: 5 + 1/24, preferredTimescale: 1000))
+
+                let timeRange = CMTimeRangeMake(CMTime(seconds: 1, preferredTimescale: 1000), CMTime(seconds: 10, preferredTimescale: 1000))
                 let reader = try AVAssetReader(asset: asset)
                 reader.timeRange = timeRange // You Can set up a specific time range (only once)
 
                 // Let's extract the downsampled samples
                 let width = Int(self.waveFormView.bounds.width)
-                let samples = try SamplesExtractor.samples(from: reader, audioTrack: track, count: width)
+                let samplingStartTime = CFAbsoluteTimeGetCurrent()
+                let samples = try SamplesExtractor.samples(from: reader, audioTrack: track, desiredNumberOfSamples: width)
+                let samplingDuration = CFAbsoluteTimeGetCurrent() - samplingStartTime
 
-                // Display the nb of samples
-                nbLabel.stringValue = "\(width) / \(samples.count)"
 
                 // Let's draw the sample into an image.
                 let configuration = WaveformConfiguration(size: waveFormView.bounds.size,
@@ -57,8 +61,14 @@ public class ExampleViewController: UniversalViewController {
                                                           style: .gradient,
                                                           position: .middle,
                                                           scale: 1)
+                let drawingStartTime = CFAbsoluteTimeGetCurrent()
+                self.waveFormView.image = WaveFormDrawer.image(from: samples, with: configuration)
+                let drawingDuration = CFAbsoluteTimeGetCurrent() - drawingStartTime
 
-                waveFormView.image = WaveFormDrawer.image(from: samples, with: configuration)
+                // Display the nb of samples
+                self.nbLabel.stringValue = "\(width)/\(samples.count)"
+                self.samplingDurationLabel.stringValue = String(format:"%.3f s",samplingDuration)
+                self.drawingDurationLabel.stringValue = String(format:"%.3f s",drawingDuration)
             }catch{
                 print("\(error)")
             }
