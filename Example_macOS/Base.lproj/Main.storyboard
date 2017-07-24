@@ -667,7 +667,7 @@
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
+                        <rect key="contentRect" x="196" y="240" width="300" height="120"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                     </window>
                     <connections>
@@ -683,18 +683,19 @@
             <objects>
                 <viewController id="W5w-8N-xO8" customClass="ExampleViewController" customModule="Example_macOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="OWz-zu-i81">
-                        <rect key="frame" x="0.0" y="0.0" width="455" height="228"/>
+                        <rect key="frame" x="0.0" y="0.0" width="500" height="228"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Mhq-Nd-dQE">
-                                <rect key="frame" x="0.0" y="108" width="455" height="120"/>
+                                <rect key="frame" x="0.0" y="54" width="500" height="120"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="120" id="m9v-ld-uu2"/>
+                                    <constraint firstAttribute="width" constant="500" id="8yH-71-YAc"/>
+                                    <constraint firstAttribute="height" constant="120" id="dfp-kh-vBL"/>
                                 </constraints>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="cP9-DV-3Cb"/>
                             </imageView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pGA-2Q-WWb">
-                                <rect key="frame" x="169" y="56" width="204" height="17"/>
+                                <rect key="frame" x="49" y="8" width="204" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="0" id="Gub-1I-YO8">
                                     <font key="font" metaFont="system"/>
@@ -703,7 +704,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ek-L4-xGh">
-                                <rect key="frame" x="124" y="56" width="29" height="17"/>
+                                <rect key="frame" x="4" y="8" width="29" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Nb :" id="O8h-0r-kMK">
                                     <font key="font" metaFont="system"/>
@@ -713,19 +714,18 @@
                             </textField>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Mhq-Nd-dQE" secondAttribute="trailing" id="1YP-Oh-6D6"/>
-                            <constraint firstItem="Mhq-Nd-dQE" firstAttribute="top" secondItem="OWz-zu-i81" secondAttribute="top" id="3dk-2I-NI9"/>
-                            <constraint firstItem="Mhq-Nd-dQE" firstAttribute="leading" secondItem="OWz-zu-i81" secondAttribute="leading" id="uG6-gq-1zk"/>
+                            <constraint firstItem="Mhq-Nd-dQE" firstAttribute="centerX" secondItem="OWz-zu-i81" secondAttribute="centerX" id="1mc-sL-LwX"/>
+                            <constraint firstItem="Mhq-Nd-dQE" firstAttribute="centerY" secondItem="OWz-zu-i81" secondAttribute="centerY" id="XSd-db-ag4"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="nbLabel" destination="pGA-2Q-WWb" id="3nd-Va-86o"/>
-                        <outlet property="topWaveformView" destination="Mhq-Nd-dQE" id="fgI-tM-3u0"/>
+                        <outlet property="waveFormView" destination="Mhq-Nd-dQE" id="fgI-tM-3u0"/>
                     </connections>
                 </viewController>
                 <customObject id="dYH-Xq-aK0" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="216.5" y="832"/>
+            <point key="canvasLocation" x="-68" y="704"/>
         </scene>
     </scenes>
 </document>

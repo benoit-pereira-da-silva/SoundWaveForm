@@ -24,12 +24,9 @@ import AVFoundation
 
 public class ExampleViewController: UniversalViewController {
 
-    @IBOutlet weak var topWaveformView: UniversalImageView!
-    /*
-    @IBOutlet weak var middleWaveformView: UniversalImageView!
-    @IBOutlet weak var bottomWaveformView: UniversalImageView!
-    @IBOutlet weak var lastWaveformView: UniversalImageView!
-    */
+    @IBOutlet weak var waveFormView: UniversalImageView!
+
+
     @IBOutlet weak var nbLabel: NSTextField!
 
 
@@ -43,25 +40,25 @@ public class ExampleViewController: UniversalViewController {
         if let track:AVAssetTrack = audioTracks.first{
             guard let asset = track.asset else { return }
             do{
-                let timeRange = CMTimeRangeMake(CMTime(seconds: 10, preferredTimescale: 1000), CMTime(seconds: 11, preferredTimescale: 1000))
+                let timeRange = CMTimeRangeMake(CMTime(seconds: 5, preferredTimescale: 1000), CMTime(seconds: 5 + 1/24, preferredTimescale: 1000))
                 let reader = try AVAssetReader(asset: asset)
                 reader.timeRange = timeRange // You Can set up a specific time range (only once)
 
-                // Extract the samples data
-                let c = 50// Int(self.topWaveformView.bounds.width)
-                guard let samples = Extractor.samples(from: reader, count: c) else { return }
+                // Let's extract the downsampled samples
+                let width = Int(self.waveFormView.bounds.width)
+                let samples = try SamplesExtractor.samples(from: reader, audioTrack: track, count: width)
 
                 // Display the nb of samples
-                nbLabel.stringValue = "\(c) / \(samples.count)"
+                nbLabel.stringValue = "\(width) / \(samples.count)"
 
-                let configuration = WaveformConfiguration(size: topWaveformView.bounds.size,
+                // Let's draw the sample into an image.
+                let configuration = WaveformConfiguration(size: waveFormView.bounds.size,
                                                           color: WaveColor.red,
                                                           style: .gradient,
                                                           position: .middle,
-                                                          scale: 1,
-                                                          horizontalZoom:1)
+                                                          scale: 1)
 
-                topWaveformView.image = WaveFormDrawer.image(from: samples, with: configuration)
+                waveFormView.image = WaveFormDrawer.image(from: samples, with: configuration)
             }catch{
                 print("\(error)")
             }

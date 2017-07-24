@@ -1,8 +1,9 @@
 //
 //  WaveFormDrawer.swift
 //  SoundWaveForm
-//  Initially based on https://github.com/dmrschmidt/DSWaveformImage
-//
+//  Drawing method was extracted from by https://github.com/dmrschmidt/DSWaveformImage
+//  I ve added macOS support and fixed and refactored.
+
 //  Created by Benoit Pereira da silva on 22/07/2017.
 //  Copyright © 2017 Pereira da Silva. All rights reserved.
 //
@@ -95,7 +96,6 @@ public struct WaveformConfiguration {
     /// Scale to be applied to the image, defaults to main screen's scale.
     let scale: CGFloat
 
-
     /// Optional padding or vertical shrinking factor for the waveform.
     let paddingFactor: CGFloat?
 
@@ -105,7 +105,6 @@ public struct WaveformConfiguration {
                 style: WaveformStyle = .gradient,
                 position: WaveformPosition = .middle,
                 scale: CGFloat = mainScreenScale,
-                horizontalZoom:CGFloat = 1,
                 paddingFactor: CGFloat? = nil) {
         self.color = color
         self.backgroundColor = backgroundColor
@@ -199,7 +198,6 @@ open class WaveFormDrawer {
             maxAmplitude = max(drawingAmplitude, maxAmplitude)
 
             if configuration.style == .striped && (Int(xPos) % 5 != 0) { continue }
-
             path.move(to: CGPoint(x: xPos, y: drawingAmplitudeUp))
             path.addLine(to: CGPoint(x: xPos, y: drawingAmplitudeDown))
         }
