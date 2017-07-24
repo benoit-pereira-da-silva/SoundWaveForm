@@ -40,25 +40,24 @@ You can define AVAssetReader.timeRange.
 ```swift
 
 let asset = AVURLAsset(url: url)
+// Choose an audio track
 let audioTracks:[AVAssetTrack] = asset.tracks(withMediaType: AVMediaTypeAudio)
 if let track:AVAssetTrack = audioTracks.first{
     guard let asset = track.asset else { return }
     do{
-		 // Select from second 1 to second 10
-        let timeRange = CMTimeRangeMake(CMTime(seconds: 1, preferredTimescale: 1000), CMTime(seconds: 10, preferredTimescale: 1000))
+	// Select from second 1 to second 10
+	let startTime = CMTime(seconds: 1, preferredTimescale: 1000)
+	let endTime = CMTime(seconds: 10, preferredTimescale: 1000)
+        let timeRange = CMTimeRangeMake(startTime, endTime)
         let reader = try AVAssetReader(asset: asset)
         reader.timeRange = timeRange 
-		  // Proceed to extraction 
+	// Proceed to extraction (refer to previous code)
+	...
     }catch{
     	...
     }	
 }
 ```
-
-
-
-
-
 
 ## Installation via Carthage
 
