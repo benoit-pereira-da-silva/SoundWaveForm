@@ -4,16 +4,19 @@ Allows to extract samples from Video or Sounds very efficiently (it relies on th
 
 I m busy at the moment, but i will provide soon improvements and Playgrounds.
 
-# It supports 
+## It supports 
 
 - macOS 
 - iOS 
 - swift 3.X
 
+## Installation via Carthage
+
+Add to your Cartfile : ` github "benoit-pereira-da-silva/SoundWaveForm"` 
+
 # Usage sample 
 
-```swift
-		let url = Bundle.main.url(forResource: "BBB", withExtension: "mov")!
+```swift 
         let asset = AVURLAsset(url: url)
         let audioTracks:[AVAssetTrack] = asset.tracks(withMediaType: AVMediaTypeAudio)
         if let track:AVAssetTrack = audioTracks.first{
@@ -53,7 +56,7 @@ I m busy at the moment, but i will provide soon improvements and Playgrounds.
 
 ## This project has been largely inspired by :
 
-- [FDWaveformView] (https://github.com/fulldecent/FDWaveformView )
-- [DSWaveformImage] (https://github.com/dmrschmidt/DSWaveformImage)
+- [FDWaveformView](https://github.com/fulldecent/FDWaveformView)
+- [DSWaveformImage](https://github.com/dmrschmidt/DSWaveformImage)
 
 Thanks to William aka [@fulldecent] (https://github.com/fulldecent/) and Daniel [@dmrschmidt](https://github.com/dmrschmidt/).
