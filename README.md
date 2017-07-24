@@ -6,9 +6,9 @@ I m busy at the moment, but i will provide soon improvements and Playgrounds.
 
 ## It supports 
 
-- macOS 
-- iOS 
-- swift 3.X
+- macOS 10.11 & + 
+- iOS 8 & + 
+- swift 3.x
 
 ## Installation via Carthage
 
