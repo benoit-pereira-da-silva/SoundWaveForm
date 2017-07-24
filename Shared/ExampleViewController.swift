@@ -58,9 +58,13 @@ public class ExampleViewController: UniversalViewController {
                 // Let's draw the sample into an image.
                 let configuration = WaveformConfiguration(size: waveFormView.bounds.size,
                                                           color: WaveColor.red,
+                                                          backgroundColor:WaveColor.clear,
                                                           style: .striped,
                                                           position: .middle,
-                                                          scale: 1)
+                                                          scale: 1,
+                                                          borderWidth:0,
+                                                          borderColor:WaveColor.black)
+
                 let drawingStartTime = CFAbsoluteTimeGetCurrent()
                 self.waveFormView.image = WaveFormDrawer.image(from: samples, with: configuration)
                 let drawingDuration = CFAbsoluteTimeGetCurrent() - drawingStartTime

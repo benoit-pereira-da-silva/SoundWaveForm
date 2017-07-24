@@ -23,7 +23,7 @@ The framework is composed of a SamplesExtractor and a WaveFormDrawer.
 let samples = try SamplesExtractor.samples(from: reader, audioTrack: track, desiredNumberOfSamples: 500)
 
 // Draw the sample into an image.
-let configuration = WaveformConfiguration(size: waveFormView.bounds.size,
+let configuration = WaveformConfiguration(size: waveFormView.bounds.size,									 backgroundColor:WaveColor.lightGray,
                                           color: WaveColor.red,
                                           style: .striped,
                                        position: .middle,

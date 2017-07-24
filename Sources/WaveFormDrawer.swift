@@ -96,22 +96,33 @@ public struct WaveformConfiguration {
     /// Scale to be applied to the image, defaults to main screen's scale.
     let scale: CGFloat
 
+    // Should we draw a border. If borderWidth == the border is ignored
+    let borderWidth:CGFloat
+
+    // Border color
+    let borderColor:WaveColor
+
     /// Optional padding or vertical shrinking factor for the waveform.
     let paddingFactor: CGFloat?
 
     public init(size: CGSize,
-                color: WaveColor = WaveColor.black,
+                color: WaveColor = WaveColor.red,
                 backgroundColor: WaveColor = WaveColor.clear,
                 style: WaveformStyle = .gradient,
                 position: WaveformPosition = .middle,
                 scale: CGFloat = mainScreenScale,
-                paddingFactor: CGFloat? = nil) {
+                borderWidth:CGFloat = 0,
+                borderColor:WaveColor = WaveColor.white,
+                paddingFactor: CGFloat? = nil
+             ) {
         self.color = color
         self.backgroundColor = backgroundColor
         self.style = style
         self.position = position
         self.size = size
         self.scale = scale
+        self.borderWidth = borderWidth
+        self.borderColor = borderColor
         self.paddingFactor = paddingFactor
     }
 }
@@ -148,7 +159,13 @@ open class WaveFormDrawer {
                 let context = NSGraphicsContext.current()!
                 context.shouldAntialias = true
                 self._drawBackground(on: context.cgContext, with: configuration)
+                context.saveGraphicsState()
                 self._drawGraph(from: samples, on: context.cgContext, with: configuration)
+                context.restoreGraphicsState()
+                if configuration.borderWidth > 0 {
+                    self._drawBorder(on: context.cgContext, with: configuration)
+                }
+
                 let image = NSImage(size: configuration.size)
                 image.addRepresentation(rep)
                 NSGraphicsContext.restoreGraphicsState()
@@ -160,13 +177,15 @@ open class WaveFormDrawer {
             let context = UIGraphicsGetCurrentContext()!
             context.setAllowsAntialiasing(true)
             context.setShouldAntialias(true)
-
             self._drawBackground(on: context, with: configuration)
+            context.saveGState()
             self._drawGraph(from: samples, on: context, with: configuration)
-
+            context.restoreGState()
+            if configuration.borderWidth > 0 {
+                self._drawBorder(on: context, with: configuration)
+            }
             let graphImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
-
             return graphImage
         #endif
     }
@@ -175,6 +194,23 @@ open class WaveFormDrawer {
         context.setFillColor(configuration.backgroundColor.cgColor)
         context.fill(CGRect(origin: CGPoint.zero, size: configuration.size))
     }
+
+    private static func _drawBorder(on context: CGContext, with configuration: WaveformConfiguration) {
+        let path = CGMutablePath()
+        let radius:CGFloat = 0
+        let inset = configuration.borderWidth
+        let rect = CGRect(origin: CGPoint.zero, size: configuration.size).insetBy(dx:inset, dy:inset)
+        context.setStrokeColor(configuration.borderColor.cgColor)
+        context.setLineWidth(configuration.borderWidth)
+        path.move(to:CGPoint(x:  rect.minX, y:  rect.maxY))
+        path.addArc(tangent1End: CGPoint(x:  rect.minX, y:  rect.minY), tangent2End: CGPoint(x:  rect.midX, y:  rect.minY), radius: radius)
+        path.addArc(tangent1End: CGPoint(x:  rect.maxX, y:  rect.minY), tangent2End: CGPoint(x:  rect.maxX, y:  rect.midY), radius: radius)
+        path.addArc(tangent1End: CGPoint(x:  rect.maxX, y:  rect.maxY), tangent2End: CGPoint(x:  rect.midX, y:  rect.maxY), radius: radius)
+        path.addArc(tangent1End: CGPoint(x:  rect.minX, y:  rect.maxY), tangent2End: CGPoint(x:  rect.minX, y:  rect.midY), radius: radius)
+        context.addPath(path)
+        context.drawPath(using: CGPathDrawingMode.stroke)
+    }
+
 
     private static func _drawGraph(from samples: [Float],
                            on context: CGContext,
