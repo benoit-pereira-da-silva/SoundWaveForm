@@ -20,6 +20,7 @@ import AVFoundation
 
 enum SamplesExtractorError:Error {
     case audioTrackNotFound
+    case audioTrackMediaTypeMissMatch(mediatype:String)
     case readingError(message:String)
 }
 
@@ -35,15 +36,30 @@ public struct SamplesExtractor{
 
     fileprivate static let _noiseFloor: Float = -50.0 // everything below -50 dB will be clipped
 
-    public static func samples(from assetReader: AVAssetReader,audioTrack:AVAssetTrack?, count: Int = 100) throws ->  [Float] {
+
+    /// Samples a sound track using a preconfigured assetReader
+    /// There is no guarantee you will obtain exactly the  desired number of samples
+    /// You can compensate in your drawing logic
+    ///
+    /// - Parameters:
+    ///   - assetReader: the preconfigured Asset Reader
+    ///   - audioTrack: the targetted audio track
+    ///   - desiredNumberOfSamples: the desired number of samples
+    /// - Returns: the samples
+    /// - Throws: Preflight or sampling errors
+    public static func samples(from assetReader: AVAssetReader,audioTrack:AVAssetTrack?, desiredNumberOfSamples: Int = 100) throws ->  [Float] {
 
         guard let audioTrack = audioTrack ?? assetReader.asset.tracks(withMediaType: AVMediaTypeAudio).first else {
             throw SamplesExtractorError.audioTrackNotFound
         }
-        let trackOutput = AVAssetReaderTrackOutput(track: audioTrack, outputSettings: _outputSettings)
+
+        guard audioTrack.mediaType == AVMediaTypeAudio else {
+            throw SamplesExtractorError.audioTrackMediaTypeMissMatch(mediatype: audioTrack.mediaType)
+        }
+
+        let trackOutput = AVAssetReaderTrackOutput(track: audioTrack, outputSettings: SamplesExtractor._outputSettings)
         assetReader.add(trackOutput)
-        let requiredNumberOfSamples = count
-        if let samples = self._extract(samplesFrom: assetReader,asset:assetReader.asset,track:audioTrack, downsampledTo: requiredNumberOfSamples){
+        if let samples = self._extract(samplesFrom: assetReader,asset:assetReader.asset,track:audioTrack, downsampledTo: desiredNumberOfSamples){
             switch assetReader.status {
             case .completed:
                 return self._normalize(samples)
@@ -55,13 +71,17 @@ public struct SamplesExtractor{
     }
 
 
-    fileprivate static func _extract(samplesFrom reader: AVAssetReader,asset:AVAsset, track:AVAssetTrack,  downsampledTo targetSampleCount: Int) -> [Float]? {
+    fileprivate static func _extract(samplesFrom reader: AVAssetReader,asset:AVAsset, track:AVAssetTrack,  downsampledTo desiredNumberOfSamples: Int) -> [Float]? {
         if let audioFormatDesc = track.formatDescriptions.first {
             let item = audioFormatDesc as! CMAudioFormatDescription     // TODO: Can this be safer?
             if let asbd = CMAudioFormatDescriptionGetStreamBasicDescription(item) {
 
-                let duration = Double(reader.timeRange.duration.value)// Float64(asset.duration.value)
-                let timscale = Double(reader.timeRange.start.timescale) //Float64(asset.duration.timescale)
+                // TODO async duration
+
+                // By default the reader's timerange is set to CMTimeRangeMake(kCMTimeZero, kCMTimePositiveInfinity)
+                // So if duration == kCMTimePositiveInfinity we should use the asset duration
+                let duration:Double = (reader.timeRange.duration == kCMTimePositiveInfinity) ? Double(asset.duration.value) : Double(reader.timeRange.duration.value)
+                let timscale:Double = (reader.timeRange.duration == kCMTimePositiveInfinity) ? Double(asset.duration.timescale) :Double(reader.timeRange.start.timescale)
 
                 let numOfTotalSamples = (asbd.pointee.mSampleRate) * duration / timscale
 
@@ -73,8 +93,7 @@ public struct SamplesExtractor{
                     channelCount = Int(fmtDesc.pointee.mChannelsPerFrame)
                 }
 
-                let widthInPixels = targetSampleCount
-                let samplesPerPixel = Int(max(1,  Double(channelCount) * numOfTotalSamples / Double(widthInPixels)))
+                let samplesPerPixel = Int(max(1,  Double(channelCount) * numOfTotalSamples / Double(desiredNumberOfSamples)))
                 let filter = [Float](repeating: 1.0 / Float(samplesPerPixel), count:samplesPerPixel)
 
                 var outputSamples = [Float]()
