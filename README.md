@@ -22,7 +22,7 @@ Add to your Cartfile : ` github "benoit-pereira-da-silva/SoundWaveForm"`
         if let track:AVAssetTrack = audioTracks.first{
             guard let asset = track.asset else { return }
             do{
-					// Select from second 1 to second 10
+		// Select from second 1 to second 10
                 let timeRange = CMTimeRangeMake(CMTime(seconds: 1, preferredTimescale: 1000), CMTime(seconds: 10, preferredTimescale: 1000))
                 let reader = try AVAssetReader(asset: asset)
                 reader.timeRange = timeRange 
@@ -59,4 +59,4 @@ Add to your Cartfile : ` github "benoit-pereira-da-silva/SoundWaveForm"`
 - [FDWaveformView](https://github.com/fulldecent/FDWaveformView)
 - [DSWaveformImage](https://github.com/dmrschmidt/DSWaveformImage)
 
-Thanks to William aka [@fulldecent] (https://github.com/fulldecent/) and Daniel [@dmrschmidt](https://github.com/dmrschmidt/).
+Thanks to William aka [@fulldecent](https://github.com/fulldecent/) and Daniel [@dmrschmidt](https://github.com/dmrschmidt/).
