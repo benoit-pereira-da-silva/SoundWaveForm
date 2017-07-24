@@ -1,7 +1,6 @@
-# SoundWave Form
+# SoundWaveForm
 
-Allows to extract samples from Video or Sounds very efficiently (it relies on the Accelerate framework). 
-I m busy at the moment, but i will provide soon improvements and Playgrounds.
+Allows to extract sound samples from Video or Sounds files very efficiently (it relies on the Accelerate framework). SoundWaveForm expose an optimized cross platform drawing that renders the waveform into an Image.
 
 ## It supports 
 
