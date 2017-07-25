@@ -2,12 +2,15 @@
 //  Extractor.swift
 //  SoundWaveForm
 //
-//  I ve been writing This extractor after analyzing
-//  I think that it is more flexible to sample from an AVAssetReader
-//  You can setup a timeRange to restrict automatically the zone of interest.
+//  I ve been writing This extractor after analyzing a bunch of existing frameworks
 //
-//  https://github.com/fulldecent/FDWaveformView 
+//  https://github.com/fulldecent/FDWaveformView
 //  https://github.com/dmrschmidt/DSWaveformImage
+//  ... 
+//  
+//  I needed to supports iOS & macOS
+//  And wanted be able to setup a timeRange to restrict automatically the zone of interest.
+//
 //
 //  Created by Benoit Pereira da silva on 22/07/2017. https://pereira-da-silva.com
 //  Copyright © 2017 Pereira da Silva. All rights reserved.
@@ -18,6 +21,7 @@ import Accelerate
 import AVFoundation
 
 enum SamplesExtractorError:Error {
+    case assetNotFound
     case audioTrackNotFound
     case audioTrackMediaTypeMissMatch(mediatype:String)
     case readingError(message:String)
@@ -36,20 +40,24 @@ public struct SamplesExtractor{
     fileprivate static let _noiseFloor: Float = -50.0 // everything below -50 dB will be clipped
 
 
-    /// Samples a sound track using a preconfigured assetReader
+    /// Samples a sound track 
     /// There is no guarantee you will obtain exactly the  desired number of samples
     /// You can compensate in your drawing logic
     ///
     /// - Parameters:
-    ///   - assetReader: the preconfigured Asset Reader
     ///   - audioTrack: the targetted audio track
+    ///   - timeRange: the sampling timeRange
     ///   - desiredNumberOfSamples: the desired number of samples
     /// - Returns: the samples
     /// - Throws: Preflight or sampling errors
-    public static func samples(from assetReader: AVAssetReader,audioTrack:AVAssetTrack?, desiredNumberOfSamples: Int = 100) throws ->  [Float] {
+    public static func samples(audioTrack:AVAssetTrack,timeRange:CMTimeRange?, desiredNumberOfSamples: Int = 100) throws ->  [Float] {
 
-        guard let audioTrack = audioTrack ?? assetReader.asset.tracks(withMediaType: AVMediaTypeAudio).first else {
-            throw SamplesExtractorError.audioTrackNotFound
+        guard let asset = audioTrack.asset else {
+            throw SamplesExtractorError.assetNotFound
+        }
+        let assetReader = try AVAssetReader(asset: asset)
+        if let timeRange = timeRange{
+            assetReader.timeRange = timeRange
         }
 
         guard audioTrack.mediaType == AVMediaTypeAudio else {

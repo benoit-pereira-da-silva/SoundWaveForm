@@ -20,7 +20,7 @@ The framework is composed of a SamplesExtractor and a WaveFormDrawer.
 
 ```swift 
 // Extract the downsampled samples
-let samples = try SamplesExtractor.samples(from: reader, audioTrack: track, desiredNumberOfSamples: 500)
+let samples = try SamplesExtractor.samples(audioTrack: track, timeRange:nil ,desiredNumberOfSamples: 500)
 
 // Draw the sample into an image.
 let configuration = WaveformConfiguration(size: waveFormView.bounds.size,									 backgroundColor:WaveColor.lightGray,
@@ -39,19 +39,16 @@ You can define AVAssetReader.timeRange.
 ```swift
 
 let asset = AVURLAsset(url: url)
-// Choose an audio track
 let audioTracks:[AVAssetTrack] = asset.tracks(withMediaType: AVMediaTypeAudio)
 if let track:AVAssetTrack = audioTracks.first{
-    guard let asset = track.asset else { return }
-    do{
-	// Select from second 1 to second 10
-	let startTime = CMTime(seconds: 1, preferredTimescale: 1000)
-	let endTime = CMTime(seconds: 10, preferredTimescale: 1000)
-        let timeRange = CMTimeRangeMake(startTime, endTime)
-        let reader = try AVAssetReader(asset: asset)
-        reader.timeRange = timeRange 
-	// Proceed to extraction (refer to previous code)
-	...
+	do{
+		// Define the timeRange from second 1 to second 10
+		let startTime = CMTime(seconds: 1, preferredTimescale: 1000)
+		let endTime = CMTime(seconds: 10, preferredTimescale: 1000)
+	   let timeRange = CMTimeRangeMake(startTime, endTime)
+
+		// Proceed to extraction (refer to previous code)
+		let samples = try SamplesExtractor.samples(audioTrack: track, timeRange:timeRange,desiredNumberOfSamples: 500)
     }catch{
     	...
     }	

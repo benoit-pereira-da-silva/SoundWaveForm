@@ -683,13 +683,13 @@
             <objects>
                 <viewController id="W5w-8N-xO8" customClass="ExampleViewController" customModule="Example_macOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="OWz-zu-i81">
-                        <rect key="frame" x="0.0" y="0.0" width="500" height="228"/>
+                        <rect key="frame" x="0.0" y="0.0" width="860" height="228"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Mhq-Nd-dQE">
-                                <rect key="frame" x="0.0" y="98" width="500" height="120"/>
+                                <rect key="frame" x="0.0" y="98" width="860" height="120"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="500" id="8yH-71-YAc"/>
+                                    <constraint firstAttribute="width" constant="860" id="8yH-71-YAc"/>
                                     <constraint firstAttribute="height" constant="120" id="dfp-kh-vBL"/>
                                 </constraints>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="cP9-DV-3Cb"/>
@@ -740,7 +740,7 @@
                                 </textFieldCell>
                             </textField>
                             <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="gJV-SG-RkM">
-                                <rect key="frame" x="-1" y="84" width="502" height="5"/>
+                                <rect key="frame" x="-1" y="84" width="863" height="5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </box>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pGA-2Q-WWb">
@@ -767,7 +767,7 @@
                 </viewController>
                 <customObject id="dYH-Xq-aK0" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-68" y="704"/>
+            <point key="canvasLocation" x="112" y="704"/>
         </scene>
     </scenes>
 </document>

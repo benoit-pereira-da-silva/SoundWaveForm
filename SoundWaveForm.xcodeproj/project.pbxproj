@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E5732E291F25EA0A0077642B /* BBB.mov in Resources */ = {isa = PBXBuildFile; fileRef = E5732E271F25EA0A0077642B /* BBB.mov */; };
-		E5732E2A1F25EA0A0077642B /* BBB.mov in Resources */ = {isa = PBXBuildFile; fileRef = E5732E271F25EA0A0077642B /* BBB.mov */; };
+		E54A51C41F2729D400BDBD18 /* Taha.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E54A51C31F2729D400BDBD18 /* Taha.mp3 */; };
+		E54A51C51F2729D400BDBD18 /* Taha.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E54A51C31F2729D400BDBD18 /* Taha.mp3 */; };
 		E5732E2B1F25EA0A0077642B /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5732E281F25EA0A0077642B /* ExampleViewController.swift */; };
 		E5A0BF791F25F20B0024564C /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5732E281F25EA0A0077642B /* ExampleViewController.swift */; };
 		E5B0ECFC1F238A40005D1A58 /* SoundWaveForm.h in Headers */ = {isa = PBXBuildFile; fileRef = E5B0ECFA1F238A40005D1A58 /* SoundWaveForm.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -73,7 +73,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		E5732E271F25EA0A0077642B /* BBB.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = BBB.mov; sourceTree = "<group>"; };
+		E54A51C31F2729D400BDBD18 /* Taha.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Taha.mp3; sourceTree = "<group>"; };
 		E5732E281F25EA0A0077642B /* ExampleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleViewController.swift; sourceTree = "<group>"; };
 		E5B0ECF71F238A40005D1A58 /* SoundWaveForm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SoundWaveForm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5B0ECFA1F238A40005D1A58 /* SoundWaveForm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoundWaveForm.h; sourceTree = "<group>"; };
@@ -133,7 +133,7 @@
 		E5732E261F25EA0A0077642B /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				E5732E271F25EA0A0077642B /* BBB.mov */,
+				E54A51C31F2729D400BDBD18 /* Taha.mp3 */,
 				E5732E281F25EA0A0077642B /* ExampleViewController.swift */,
 			);
 			path = Shared;
@@ -376,7 +376,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E5732E291F25EA0A0077642B /* BBB.mov in Resources */,
+				E54A51C41F2729D400BDBD18 /* Taha.mp3 in Resources */,
 				E5B0ED5E1F238B6B005D1A58 /* Assets.xcassets in Resources */,
 				E5B0ED611F238B6B005D1A58 /* Main.storyboard in Resources */,
 			);
@@ -393,8 +393,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E54A51C51F2729D400BDBD18 /* Taha.mp3 in Resources */,
 				E5B0ED841F238BB2005D1A58 /* LaunchScreen.storyboard in Resources */,
-				E5732E2A1F25EA0A0077642B /* BBB.mov in Resources */,
 				E5B0ED811F238BB2005D1A58 /* Assets.xcassets in Resources */,
 				E5B0ED7F1F238BB2005D1A58 /* Main.storyboard in Resources */,
 			);

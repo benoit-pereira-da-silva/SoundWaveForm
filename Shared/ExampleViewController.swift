@@ -37,21 +37,18 @@ public class ExampleViewController: UniversalViewController {
         super.viewDidLoad()
 
 
-        let url = Bundle.main.url(forResource: "BBB", withExtension: "mov")!
+        let url = Bundle.main.url(forResource: "Taha", withExtension: "mp3")!
         let asset = AVURLAsset(url: url)
         let audioTracks:[AVAssetTrack] = asset.tracks(withMediaType: AVMediaTypeAudio)
         if let track:AVAssetTrack = audioTracks.first{
-            guard let asset = track.asset else { return }
             do{
 
-                let timeRange = CMTimeRangeMake(CMTime(seconds: 1, preferredTimescale: 1000), CMTime(seconds: 10, preferredTimescale: 1000))
-                let reader = try AVAssetReader(asset: asset)
-                reader.timeRange = timeRange // You Can set up a specific time range (only once)
+                let timeRange = CMTimeRangeMake(CMTime(seconds: 0, preferredTimescale: 1000), CMTime(seconds: 10, preferredTimescale: 1000))
+                let width = Int(self.waveFormView.bounds.width)
 
                 // Let's extract the downsampled samples
-                let width = Int(self.waveFormView.bounds.width)
                 let samplingStartTime = CFAbsoluteTimeGetCurrent()
-                let samples = try SamplesExtractor.samples(from: reader, audioTrack: track, desiredNumberOfSamples: width)
+                let samples = try SamplesExtractor.samples(audioTrack: track,timeRange: timeRange, desiredNumberOfSamples: width)
                 let samplingDuration = CFAbsoluteTimeGetCurrent() - samplingStartTime
 
 
@@ -59,7 +56,7 @@ public class ExampleViewController: UniversalViewController {
                 let configuration = WaveformConfiguration(size: waveFormView.bounds.size,
                                                           color: WaveColor.red,
                                                           backgroundColor:WaveColor.clear,
-                                                          style: .striped(period:3),
+                                                          style: .gradient,
                                                           position: .middle,
                                                           scale: 1,
                                                           borderWidth:0,

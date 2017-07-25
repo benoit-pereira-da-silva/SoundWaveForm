@@ -241,7 +241,6 @@ open class WaveFormDrawer {
                 path.move(to: CGPoint(x: xPos, y: drawingAmplitudeUp))
                 path.addLine(to: CGPoint(x: xPos, y: drawingAmplitudeDown))
             }
-
         }
         context.addPath(path)
 
