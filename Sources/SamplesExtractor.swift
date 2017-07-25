@@ -8,9 +8,9 @@
 //  https://github.com/dmrschmidt/DSWaveformImage
 //  ... 
 //  
-//  I needed to supports iOS & macOS
-//  And wanted be able to setup a timeRange to restrict automatically the zone of interest.
-//
+//  - added supports iOS & macOS
+//  - ability to setup a timeRange to restrict automatically the zone of interest.
+//  - improved performance
 //
 //  Created by Benoit Pereira da silva on 22/07/2017. https://pereira-da-silva.com
 //  Copyright © 2017 Pereira da Silva. All rights reserved.
@@ -27,6 +27,7 @@ enum SamplesExtractorError:Error {
     case readingError(message:String)
 }
 
+
 public struct SamplesExtractor{
 
     fileprivate static let _outputSettings : [String : Any] = [
@@ -36,6 +37,8 @@ public struct SamplesExtractor{
             AVLinearPCMIsFloatKey: false,
             AVLinearPCMIsNonInterleaved: false
     ]
+
+    static var noiseFloor:Float { return _noiseFloor }
 
     fileprivate static let _noiseFloor: Float = -50.0 // everything below -50 dB will be clipped
 
@@ -50,7 +53,7 @@ public struct SamplesExtractor{
     ///   - desiredNumberOfSamples: the desired number of samples
     /// - Returns: the samples
     /// - Throws: Preflight or sampling errors
-    public static func samples(audioTrack:AVAssetTrack,timeRange:CMTimeRange?, desiredNumberOfSamples: Int = 100) throws ->  [Float] {
+    public static func samples(audioTrack:AVAssetTrack,timeRange:CMTimeRange?, desiredNumberOfSamples: Int = 100) throws ->  (samples: [Float], sampleMax: Float) {
 
         guard let asset = audioTrack.asset else {
             throw SamplesExtractorError.assetNotFound
@@ -66,10 +69,11 @@ public struct SamplesExtractor{
 
         let trackOutput = AVAssetReaderTrackOutput(track: audioTrack, outputSettings: SamplesExtractor._outputSettings)
         assetReader.add(trackOutput)
-        if let samples = self._extract(samplesFrom: assetReader,asset:assetReader.asset,track:audioTrack, downsampledTo: desiredNumberOfSamples){
+        if let extracted = self._extract(samplesFrom: assetReader,asset:assetReader.asset,track:audioTrack, downsampledTo: desiredNumberOfSamples){
             switch assetReader.status {
             case .completed:
-                return self._normalize(samples)
+                let normalizedSamples = (samples:self._normalize(extracted.samples), sampleMax :extracted.sampleMax)
+                return normalizedSamples
             default:
                 throw SamplesExtractorError.readingError(message:" reading waveform audio data has failed \(assetReader.status)")
             }
@@ -78,12 +82,12 @@ public struct SamplesExtractor{
     }
 
 
-    fileprivate static func _extract(samplesFrom reader: AVAssetReader,asset:AVAsset, track:AVAssetTrack,  downsampledTo desiredNumberOfSamples: Int) -> [Float]? {
+    fileprivate static func _extract(samplesFrom reader: AVAssetReader,asset:AVAsset, track:AVAssetTrack,  downsampledTo desiredNumberOfSamples: Int) ->  (samples: [Float], sampleMax: Float)? {
         if let audioFormatDesc = track.formatDescriptions.first {
             let item = audioFormatDesc as! CMAudioFormatDescription     // TODO: Can this be safer?
             if let asbd = CMAudioFormatDescriptionGetStreamBasicDescription(item) {
 
-                // TODO async duration
+                var sampleMax:Float = -Float.infinity
 
                 // By default the reader's timerange is set to CMTimeRangeMake(kCMTimeZero, kCMTimePositiveInfinity)
                 // So if duration == kCMTimePositiveInfinity we should use the asset duration
@@ -128,7 +132,8 @@ public struct SamplesExtractor{
 
                     guard samplesToProcess > 0 else { continue }
 
-                    processSamples(fromData: &sampleBuffer,
+                    self._processSamples(fromData: &sampleBuffer,
+                                        sampleMax: &sampleMax,
                                    outputSamples: &outputSamples,
                                    samplesToProcess: samplesToProcess,
                                    downSampledLength: downSampledLength,
@@ -145,22 +150,21 @@ public struct SamplesExtractor{
 
                     let filter = [Float](repeating: 1.0 / Float(samplesPerPixel), count: samplesPerPixel)
 
-                    processSamples(fromData: &sampleBuffer,
-                                   outputSamples: &outputSamples,
+                    self._processSamples(fromData: &sampleBuffer,
+                                        sampleMax: &sampleMax,
+                                        outputSamples: &outputSamples,
                                    samplesToProcess: samplesToProcess,
                                    downSampledLength: downSampledLength,
                                    samplesPerPixel: samplesPerPixel,
                                    filter: filter)
                 }
-
-                return outputSamples
-
+                return (samples: outputSamples, sampleMax: sampleMax)
             }
         }
         return nil
     }
 
-    private static func processSamples(fromData sampleBuffer: inout Data,  outputSamples: inout [Float], samplesToProcess: Int, downSampledLength: Int, samplesPerPixel: Int, filter: [Float]) {
+    private static func _processSamples(fromData sampleBuffer: inout Data,  sampleMax: inout Float,  outputSamples: inout [Float], samplesToProcess: Int, downSampledLength: Int, samplesPerPixel: Int, filter: [Float]) {
         sampleBuffer.withUnsafeBytes { (samples: UnsafePointer<Int16>) in
 
             var processingBuffer = [Float](repeating: 0.0, count: samplesToProcess)
@@ -190,6 +194,9 @@ public struct SamplesExtractor{
                         vDSP_Length(downSampledLength),
                         vDSP_Length(samplesPerPixel))
 
+            for element in downSampledData{
+                if element > sampleMax { sampleMax = element }
+            }
             // Remove processed samples
             sampleBuffer.removeFirst(samplesToProcess * MemoryLayout<Int16>.size)
             outputSamples += downSampledData

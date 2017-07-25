@@ -132,7 +132,7 @@ public struct WaveformConfiguration {
 
 open class WaveFormDrawer {
 
-    public static func image(from samples: [Float], with configuration: WaveformConfiguration) -> WaveImage? {
+    public static func image(with sampling:(samples: [Float], sampleMax: Float) , and configuration: WaveformConfiguration) -> WaveImage? {
         #if os(OSX)
             if let context = NSGraphicsContext.current(){
                 // Let's use an Image
@@ -140,7 +140,10 @@ open class WaveFormDrawer {
                 image.lockFocus()
                 context.shouldAntialias = true
                 self._drawBackground(on: context.cgContext, with: configuration)
-                self._drawGraph(from: samples, on: context.cgContext, with: configuration)
+                self._drawGraph(from: sampling, on: context.cgContext, with: configuration)
+                if configuration.borderWidth > 0 {
+                    self._drawBorder(on: context.cgContext, with: configuration)
+                }
                 return image
             }else{
                 // Let's draw Off screen
@@ -160,7 +163,7 @@ open class WaveFormDrawer {
                 context.shouldAntialias = true
                 self._drawBackground(on: context.cgContext, with: configuration)
                 context.saveGraphicsState()
-                self._drawGraph(from: samples, on: context.cgContext, with: configuration)
+                self._drawGraph(from: sampling, on: context.cgContext, with: configuration)
                 context.restoreGraphicsState()
                 if configuration.borderWidth > 0 {
                     self._drawBorder(on: context.cgContext, with: configuration)
@@ -172,7 +175,6 @@ open class WaveFormDrawer {
                 return image
             }
         #elseif os(iOS)
-
             UIGraphicsBeginImageContextWithOptions(configuration.size, false, configuration.scale)
             let context = UIGraphicsGetCurrentContext()!
             context.setAllowsAntialiasing(true)
@@ -211,7 +213,7 @@ open class WaveFormDrawer {
     }
 
 
-    private static func _drawGraph(from samples: [Float],
+    private static func _drawGraph(from sampling:(samples: [Float], sampleMax: Float),
                            on context: CGContext,
                            with configuration: WaveformConfiguration) {
         let graphRect = CGRect(origin: CGPoint.zero, size: configuration.size)
@@ -219,12 +221,12 @@ open class WaveFormDrawer {
         let positionAdjustedGraphCenter = graphCenter + CGFloat(configuration.position.rawValue) * graphCenter
         let verticalPaddingDivisor = configuration.paddingFactor ?? CGFloat(configuration.position == .middle ? 2.5 : 1.5)
         let drawMappingFactor = graphRect.size.height / verticalPaddingDivisor
-        let minimumGraphAmplitude: CGFloat = 1 // we want to see at least a 1pt line for silence
+        let minimumGraphAmplitude: CGFloat = 2 // we want to see at least a 1pt line for silence
 
         let path = CGMutablePath()
-        var maxAmplitude: CGFloat = 0.0 // we know 1 is our max in normalized data, but we keep it 'generic'
+        var maxAmplitude: CGFloat = CGFloat(sampling.sampleMax / SamplesExtractor.noiseFloor ) // we know 1 is our max in normalized data, but we keep it 'generic'
         context.setLineWidth(1.0 / configuration.scale)
-        for (x, sample) in samples.enumerated() {
+        for (x, sample) in sampling.samples.enumerated() {
             let xPos = CGFloat(x) / configuration.scale
             let invertedDbSample = 1 - CGFloat(sample) // sample is in dB, linearly normalized to [0, 1] (1 -> -50 dB)
             let drawingAmplitude = max(minimumGraphAmplitude, invertedDbSample * drawMappingFactor)
