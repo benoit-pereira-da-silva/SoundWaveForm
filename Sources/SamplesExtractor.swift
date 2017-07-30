@@ -63,8 +63,8 @@ public struct SamplesExtractor{
             assetReader.timeRange = timeRange
         }
 
-        guard audioTrack.mediaType == AVMediaTypeAudio else {
-            throw SamplesExtractorError.audioTrackMediaTypeMissMatch(mediatype: audioTrack.mediaType)
+        guard audioTrack.mediaType == AVMediaType.audio else {
+            throw SamplesExtractorError.audioTrackMediaTypeMissMatch(mediatype: audioTrack.mediaType.rawValue)
         }
 
         let trackOutput = AVAssetReaderTrackOutput(track: audioTrack, outputSettings: SamplesExtractor._outputSettings)

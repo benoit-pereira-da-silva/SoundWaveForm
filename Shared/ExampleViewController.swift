@@ -39,7 +39,9 @@ public class ExampleViewController: UniversalViewController {
 
         let url = Bundle.main.url(forResource: "Beat110", withExtension: "mp3")!
         let asset = AVURLAsset(url: url)
-        let audioTracks:[AVAssetTrack] = asset.tracks(withMediaType: AVMediaTypeAudio)
+        let audioTracks:[AVAssetTrack] = asset.tracks.filter { (track) -> Bool in
+            return track.mediaType == AVMediaType.audio
+        }
         if let track:AVAssetTrack = audioTracks.first{
             do{
 

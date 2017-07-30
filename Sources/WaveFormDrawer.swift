@@ -18,7 +18,6 @@ import AVFoundation
 
     public typealias WaveImage = NSImage
     public typealias WaveColor = NSColor
-    var mainScreenScale:CGFloat = 1
 
 #elseif os(iOS)
 
@@ -26,7 +25,6 @@ import AVFoundation
 
     public typealias WaveImage = UIImage
     public typealias WaveColor = UIColor
-    var mainScreenScale = UIScreen.main.scale
 
     extension WaveColor {
 
@@ -78,6 +76,12 @@ public enum WaveformStyle{
 
 /// Allows customization of the waveform output image.
 public struct WaveformConfiguration {
+
+    #if os(OSX)
+    public static let mainScreenScale:CGFloat = 1
+    #elseif os(iOS)
+    public static let mainScreenScale = UIScreen.main.scale
+    #endif
     /// Desired output size of the waveform image, works together with scale.
     let size: CGSize
 
@@ -110,7 +114,7 @@ public struct WaveformConfiguration {
                 backgroundColor: WaveColor = WaveColor.clear,
                 style: WaveformStyle = .gradient,
                 position: WaveformPosition = .middle,
-                scale: CGFloat = mainScreenScale,
+                scale: CGFloat = WaveformConfiguration.mainScreenScale,
                 borderWidth:CGFloat = 0,
                 borderColor:WaveColor = WaveColor.white,
                 paddingFactor: CGFloat? = nil
@@ -134,7 +138,7 @@ open class WaveFormDrawer {
 
     public static func image(with sampling:(samples: [Float], sampleMax: Float) , and configuration: WaveformConfiguration) -> WaveImage? {
         #if os(OSX)
-            if let context = NSGraphicsContext.current(){
+            if let context = NSGraphicsContext.current{
                 // Let's use an Image
                 let image = NSImage(size: configuration.size)
                 image.lockFocus()
@@ -155,11 +159,11 @@ open class WaveFormDrawer {
                                            samplesPerPixel: 4,
                                            hasAlpha: true,
                                            isPlanar: false,
-                                           colorSpaceName: NSCalibratedRGBColorSpace,
+                                           colorSpaceName: NSColorSpaceName.calibratedRGB,
                                            bytesPerRow: 4  * Int(configuration.size.width),
                                            bitsPerPixel: 32)!
-                NSGraphicsContext.setCurrent(NSGraphicsContext(bitmapImageRep: rep))
-                let context = NSGraphicsContext.current()!
+                NSGraphicsContext.current = NSGraphicsContext(bitmapImageRep: rep)
+                let context = NSGraphicsContext.current!
                 context.shouldAntialias = true
                 self._drawBackground(on: context.cgContext, with: configuration)
                 context.saveGraphicsState()
@@ -181,7 +185,7 @@ open class WaveFormDrawer {
             context.setShouldAntialias(true)
             self._drawBackground(on: context, with: configuration)
             context.saveGState()
-            self._drawGraph(from: samples, on: context, with: configuration)
+            self._drawGraph(from: sampling, on: context, with: configuration)
             context.restoreGState()
             if configuration.borderWidth > 0 {
                 self._drawBorder(on: context, with: configuration)
