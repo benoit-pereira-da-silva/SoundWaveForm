@@ -181,7 +181,7 @@ open class WaveFormDrawer {
             context.setShouldAntialias(true)
             self._drawBackground(on: context, with: configuration)
             context.saveGState()
-            self._drawGraph(from: samples, on: context, with: configuration)
+            self._drawGraph(from: sampling, on: context, with: configuration)
             context.restoreGState()
             if configuration.borderWidth > 0 {
                 self._drawBorder(on: context, with: configuration)
