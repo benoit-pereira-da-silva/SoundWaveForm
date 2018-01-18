@@ -1,3 +1,7 @@
+
+[![Swift 4](https://img.shields.io/badge/Swift-4.0-orange.svg)](https://swift.org)  [![Platform](https://img.shields.io/badge/platforms-macOS%20∙%20iOS%20-blue.svg)](https://developer.apple.com/platforms/) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+
+
 # SoundWaveForm
 
 Allows to extract sound samples from Video or Sounds files very efficiently (it relies on the Accelerate framework). SoundWaveForm expose an optimized cross platform drawing that renders the waveform into an Image.
@@ -6,7 +10,7 @@ Allows to extract sound samples from Video or Sounds files very efficiently (it 
 
 - macOS 10.11 & + 
 - iOS 8 & + 
-- swift 3.x
+- swift 4.x (if you need to support swift 3 use the [v2.0.1] (https://github.com/benoit-pereira-da-silva/SoundWaveForm/releases/tag/v2.0.1))
 
 # Screen Shots
 
