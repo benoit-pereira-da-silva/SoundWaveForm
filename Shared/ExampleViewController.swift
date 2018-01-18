@@ -38,8 +38,14 @@ public class ExampleViewController: UniversalViewController {
 
 
         let url = Bundle.main.url(forResource: "Beat110", withExtension: "mp3")!
-        let asset = AVURLAsset(url: url)
-        let audioTracks:[AVAssetTrack] = asset.tracks(withMediaType: AVMediaTypeAudio)
+        let asset = AVAsset(url: url)
+        #if os(OSX)
+            let audioTracks:[AVAssetTrack] = asset.tracks(withMediaType: AVMediaType.audio)
+        #else
+            // sometimes the difference between macOS and iOS are saddening
+            // This distinction has been introduced with swift4
+            let audioTracks:[AVAssetTrack] = asset.tracks(withMediaType:  AVMediaType.audio)
+        #endif
         if let track:AVAssetTrack = audioTracks.first{
             do{
 

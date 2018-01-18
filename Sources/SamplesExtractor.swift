@@ -23,7 +23,7 @@ import AVFoundation
 enum SamplesExtractorError:Error {
     case assetNotFound
     case audioTrackNotFound
-    case audioTrackMediaTypeMissMatch(mediatype:String)
+    case audioTrackMediaTypeMissMatch(mediatype:AVMediaType)
     case readingError(message:String)
 }
 
@@ -63,7 +63,7 @@ public struct SamplesExtractor{
             assetReader.timeRange = timeRange
         }
 
-        guard audioTrack.mediaType == AVMediaTypeAudio else {
+        guard audioTrack.mediaType == .audio else {
             throw SamplesExtractorError.audioTrackMediaTypeMissMatch(mediatype: audioTrack.mediaType)
         }
 

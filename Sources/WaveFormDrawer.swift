@@ -18,7 +18,7 @@ import AVFoundation
 
     public typealias WaveImage = NSImage
     public typealias WaveColor = NSColor
-    var mainScreenScale:CGFloat = 1
+    public var mainScreenScale:CGFloat = 1
 
 #elseif os(iOS)
 
@@ -26,7 +26,7 @@ import AVFoundation
 
     public typealias WaveImage = UIImage
     public typealias WaveColor = UIColor
-    var mainScreenScale = UIScreen.main.scale
+    public var mainScreenScale = UIScreen.main.scale
 
     extension WaveColor {
 
@@ -134,7 +134,7 @@ open class WaveFormDrawer {
 
     public static func image(with sampling:(samples: [Float], sampleMax: Float) , and configuration: WaveformConfiguration) -> WaveImage? {
         #if os(OSX)
-            if let context = NSGraphicsContext.current(){
+            if let context = NSGraphicsContext.current{
                 // Let's use an Image
                 let image = NSImage(size: configuration.size)
                 image.lockFocus()
@@ -155,11 +155,11 @@ open class WaveFormDrawer {
                                            samplesPerPixel: 4,
                                            hasAlpha: true,
                                            isPlanar: false,
-                                           colorSpaceName: NSCalibratedRGBColorSpace,
+                                           colorSpaceName: NSColorSpaceName.calibratedRGB,
                                            bytesPerRow: 4  * Int(configuration.size.width),
                                            bitsPerPixel: 32)!
-                NSGraphicsContext.setCurrent(NSGraphicsContext(bitmapImageRep: rep))
-                let context = NSGraphicsContext.current()!
+                NSGraphicsContext.current = NSGraphicsContext(bitmapImageRep: rep)
+                let context = NSGraphicsContext.current!
                 context.shouldAntialias = true
                 self._drawBackground(on: context.cgContext, with: configuration)
                 context.saveGraphicsState()
