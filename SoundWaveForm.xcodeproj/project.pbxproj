@@ -28,8 +28,8 @@
 		E5B0ED901F239050005D1A58 /* WaveFormDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B0ED8E1F239050005D1A58 /* WaveFormDrawer.swift */; };
 		E5B0ED971F239D69005D1A58 /* SoundWaveForm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5B0ECF71F238A40005D1A58 /* SoundWaveForm.framework */; };
 		E5B0ED981F239D69005D1A58 /* SoundWaveForm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E5B0ECF71F238A40005D1A58 /* SoundWaveForm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E5B0ED9C1F239D71005D1A58 /* SoundWaveFormTouch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5B0ED6B1F238B9D005D1A58 /* SoundWaveFormTouch.framework */; };
-		E5B0ED9D1F239D71005D1A58 /* SoundWaveFormTouch.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E5B0ED6B1F238B9D005D1A58 /* SoundWaveFormTouch.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E5DEEC8D2010EB7500ADAE3F /* SoundWaveForm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5B0ED6B1F238B9D005D1A58 /* SoundWaveForm.framework */; };
+		E5DEEC8E2010EB7500ADAE3F /* SoundWaveForm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E5B0ED6B1F238B9D005D1A58 /* SoundWaveForm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,7 +40,7 @@
 			remoteGlobalIDString = E5B0ECF61F238A40005D1A58;
 			remoteInfo = SoundWaveForm;
 		};
-		E5B0ED9E1F239D71005D1A58 /* PBXContainerItemProxy */ = {
+		E5DEEC8F2010EB7500ADAE3F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E5B0ECEE1F238A40005D1A58 /* Project object */;
 			proxyType = 1;
@@ -61,13 +61,13 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E5B0EDA01F239D71005D1A58 /* Embed Frameworks */ = {
+		E5DEEC912010EB7500ADAE3F /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				E5B0ED9D1F239D71005D1A58 /* SoundWaveFormTouch.framework in Embed Frameworks */,
+				E5DEEC8E2010EB7500ADAE3F /* SoundWaveForm.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -86,7 +86,7 @@
 		E5B0ED5D1F238B6B005D1A58 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E5B0ED601F238B6B005D1A58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E5B0ED621F238B6B005D1A58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E5B0ED6B1F238B9D005D1A58 /* SoundWaveFormTouch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SoundWaveFormTouch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E5B0ED6B1F238B9D005D1A58 /* SoundWaveForm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SoundWaveForm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5B0ED6D1F238B9D005D1A58 /* SoundWaveFormTouch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoundWaveFormTouch.h; sourceTree = "<group>"; };
 		E5B0ED6E1F238B9D005D1A58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E5B0ED771F238BB2005D1A58 /* Example_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,7 +126,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E5B0ED9C1F239D71005D1A58 /* SoundWaveFormTouch.framework in Frameworks */,
+				E5DEEC8D2010EB7500ADAE3F /* SoundWaveForm.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -161,7 +161,7 @@
 			children = (
 				E5B0ECF71F238A40005D1A58 /* SoundWaveForm.framework */,
 				E5B0ED571F238B6B005D1A58 /* Example_macOS.app */,
-				E5B0ED6B1F238B9D005D1A58 /* SoundWaveFormTouch.framework */,
+				E5B0ED6B1F238B9D005D1A58 /* SoundWaveForm.framework */,
 				E5B0ED771F238BB2005D1A58 /* Example_iOS.app */,
 			);
 			name = Products;
@@ -291,7 +291,7 @@
 			);
 			name = SoundWaveFormTouch;
 			productName = SoundWaveFormTouch;
-			productReference = E5B0ED6B1F238B9D005D1A58 /* SoundWaveFormTouch.framework */;
+			productReference = E5B0ED6B1F238B9D005D1A58 /* SoundWaveForm.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		E5B0ED761F238BB2005D1A58 /* Example_iOS */ = {
@@ -301,12 +301,12 @@
 				E5B0ED731F238BB2005D1A58 /* Sources */,
 				E5B0ED741F238BB2005D1A58 /* Frameworks */,
 				E5B0ED751F238BB2005D1A58 /* Resources */,
-				E5B0EDA01F239D71005D1A58 /* Embed Frameworks */,
+				E5DEEC912010EB7500ADAE3F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				E5B0ED9F1F239D71005D1A58 /* PBXTargetDependency */,
+				E5DEEC902010EB7500ADAE3F /* PBXTargetDependency */,
 			);
 			name = Example_iOS;
 			productName = Example_iOS;
@@ -453,10 +453,10 @@
 			target = E5B0ECF61F238A40005D1A58 /* SoundWaveForm */;
 			targetProxy = E5B0ED991F239D69005D1A58 /* PBXContainerItemProxy */;
 		};
-		E5B0ED9F1F239D71005D1A58 /* PBXTargetDependency */ = {
+		E5DEEC902010EB7500ADAE3F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = E5B0ED6A1F238B9D005D1A58 /* SoundWaveFormTouch */;
-			targetProxy = E5B0ED9E1F239D71005D1A58 /* PBXContainerItemProxy */;
+			targetProxy = E5DEEC8F2010EB7500ADAE3F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -615,7 +615,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pereira-da-silva.SoundWaveForm";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SoundWaveForm;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -640,7 +640,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pereira-da-silva.SoundWaveForm";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SoundWaveForm;
 				SKIP_INSTALL = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
@@ -703,7 +703,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pereira-da-silva.SoundWaveFormTouch";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SoundWaveForm;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -729,7 +729,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pereira-da-silva.SoundWaveFormTouch";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SoundWaveForm;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -745,12 +745,14 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LX7WHQV846;
 				INFOPLIST_FILE = Example_iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.pereira-da-silva.Example-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.pereira-da-silva.ExampleIOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
@@ -764,12 +766,14 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LX7WHQV846;
 				INFOPLIST_FILE = Example_iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.pereira-da-silva.Example-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.pereira-da-silva.ExampleIOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;

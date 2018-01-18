@@ -7,16 +7,15 @@
 //
 
 import AVFoundation
+import SoundWaveForm
 
 #if os(OSX)
     import AppKit
-    import SoundWaveForm
     public typealias UniversalViewController = NSViewController
     public typealias UniversalImageView = NSImageView
       public typealias UniversalLabel = NSTextField
 #elseif os(iOS)
     import UIKit
-    import SoundWaveFormTouch
     public typealias UniversalViewController = UIViewController
     public typealias UniversalImageView = UIImageView
     public typealias UniversalLabel = UILabel
