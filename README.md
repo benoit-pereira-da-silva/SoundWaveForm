@@ -10,7 +10,7 @@ Allows to extract sound samples from Video or Sounds files very efficiently (it 
 
 - macOS 10.11 & + 
 - iOS 8 & + 
-- swift 4.x (if you need to support swift 3 use the [v2.0.1] (https://github.com/benoit-pereira-da-silva/SoundWaveForm/releases/tag/v2.0.1))
+- swift 4.x (if you need to support swift 3 use the [v2.0.1](https://github.com/benoit-pereira-da-silva/SoundWaveForm/releases/tag/v2.0.1))
 
 # Screen Shots
 
