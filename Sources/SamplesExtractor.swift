@@ -20,17 +20,17 @@ import Foundation
 import Accelerate
 import AVFoundation
 
-enum SamplesExtractorError:Error {
+enum SamplesExtractorError: Error {
     case assetNotFound
     case audioTrackNotFound
-    case audioTrackMediaTypeMissMatch(mediatype:AVMediaType)
-    case readingError(message:String)
+    case audioTrackMediaTypeMissMatch(mediatype: AVMediaType)
+    case readingError(message: String)
 }
 
 
 public struct SamplesExtractor{
 
-    fileprivate static let _outputSettings : [String : Any] = [
+    fileprivate static let _outputSettings: [String : Any] = [
             AVFormatIDKey: kAudioFormatLinearPCM,
             AVLinearPCMBitDepthKey: 16,
             AVLinearPCMIsBigEndianKey: false,
@@ -53,7 +53,7 @@ public struct SamplesExtractor{
     ///   - desiredNumberOfSamples: the desired number of samples
     /// - Returns: the samples
     /// - Throws: Preflight or sampling errors
-    public static func samples(audioTrack:AVAssetTrack,timeRange:CMTimeRange?, desiredNumberOfSamples: Int = 100) throws ->  (samples: [Float], sampleMax: Float) {
+    public static func samples(audioTrack: AVAssetTrack, timeRange: CMTimeRange?, desiredNumberOfSamples: Int = 100) throws ->  (samples: [Float], sampleMax: Float) {
 
         guard let asset = audioTrack.asset else {
             throw SamplesExtractorError.assetNotFound
@@ -82,7 +82,7 @@ public struct SamplesExtractor{
     }
 
 
-    fileprivate static func _extract(samplesFrom reader: AVAssetReader,asset:AVAsset, track:AVAssetTrack,  downsampledTo desiredNumberOfSamples: Int) ->  (samples: [Float], sampleMax: Float)? {
+    fileprivate static func _extract(samplesFrom reader: AVAssetReader, asset: AVAsset, track:AVAssetTrack,  downsampledTo desiredNumberOfSamples: Int) ->  (samples: [Float], sampleMax: Float)? {
         if let audioFormatDesc = track.formatDescriptions.first {
             let item = audioFormatDesc as! CMAudioFormatDescription     // TODO: Can this be safer?
             if let asbd = CMAudioFormatDescriptionGetStreamBasicDescription(item) {
