@@ -23,17 +23,30 @@ Allows to extract sound samples from Video or Sounds files very efficiently (it 
 The framework is composed of a SamplesExtractor and a WaveFormDrawer.
 
 ```swift 
-// Extract the downsampled samples
-let samples = try SamplesExtractor.samples(audioTrack: track, timeRange:nil ,desiredNumberOfSamples: 500)
 
-// Draw the sample into an image.
-let configuration = WaveformConfiguration(size: waveFormView.bounds.size,									 backgroundColor:WaveColor.lightGray,
-                                          color: WaveColor.red,
-                                          style: .striped,
-                                       position: .middle,
-                                          scale: 1)
-// Let's display the waveform in a view                     
-self.waveFormView.image = WaveFormDrawer.image(from: samples, with: configuration)
+// Configure the drawings
+let configuration = WaveformConfiguration( size: waveFormView.bounds.size,
+											backgroundColor: WaveColor.lightGray,
+											color: WaveColor.red,
+											style: .striped,
+											position: .middle,
+											scale: 1)
+
+// Extract the downsampled samples
+// Proceed to extraction
+SamplesExtractor.samples(audioTrack: track,
+        timeRange: nil,
+        desiredNumberOfSamples: 500,
+        onSuccess:{ samples, sampleMax in
+        	// Let's display the waveform in a view                     
+			self.waveFormView.image = WaveFormDrawer.image(from: samples, with: configuration)
+        },
+        onFailure: { error in 
+            ... // Handle the error
+        }
+)
+
+
 ```
 
 ## How to extract sample from a specified timeRange?
@@ -45,17 +58,24 @@ You can define AVAssetReader.timeRange.
 let asset = AVURLAsset(url: url)
 let audioTracks:[AVAssetTrack] = asset.tracks(withMediaType: AVMediaTypeAudio)
 if let track:AVAssetTrack = audioTracks.first{
-	do{
+		
 		// Define the timeRange from second 1 to second 10
 		let startTime = CMTime(seconds: 1, preferredTimescale: 1000)
 		let endTime = CMTime(seconds: 10, preferredTimescale: 1000)
-	   let timeRange = CMTimeRangeMake(startTime, endTime)
+		let timeRange = CMTimeRangeMake(startTime, endTime)
 
 		// Proceed to extraction (refer to previous code)
-		let samples = try SamplesExtractor.samples(audioTrack: track, timeRange:timeRange,desiredNumberOfSamples: 500)
-    }catch{
-    	...
-    }	
+		SamplesExtractor.samples(audioTrack: track,
+				timeRange:timeRange,
+				desiredNumberOfSamples: 500,
+				onSuccess:{ samples, sampleMax in
+					... // Proceeed
+				},
+				onFailure: { error in 
+					... // Handle the error
+				}
+		)
+  
 }
 ```
 
