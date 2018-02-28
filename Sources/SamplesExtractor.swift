@@ -30,7 +30,8 @@ enum SamplesExtractorError: Error {
 
 public struct SamplesExtractor{
 
-    fileprivate static let _outputSettings: [String : Any] = [
+    
+    public fileprivate(set) static var outputSettings: [String : Any] = [
             AVFormatIDKey: kAudioFormatLinearPCM,
             AVLinearPCMBitDepthKey: 16,
             AVLinearPCMIsBigEndianKey: false,
@@ -38,9 +39,7 @@ public struct SamplesExtractor{
             AVLinearPCMIsNonInterleaved: false
     ]
 
-    static var noiseFloor:Float { return _noiseFloor }
-
-    fileprivate static let _noiseFloor: Float = -50.0 // everything below -50 dB will be clipped
+    public fileprivate(set) static var noiseFloor: Float = -50.0 // everything below -50 dB will be clipped
 
 
     /// Samples a sound track 
@@ -67,7 +66,7 @@ public struct SamplesExtractor{
             throw SamplesExtractorError.audioTrackMediaTypeMissMatch(mediatype: audioTrack.mediaType)
         }
 
-        let trackOutput = AVAssetReaderTrackOutput(track: audioTrack, outputSettings: SamplesExtractor._outputSettings)
+        let trackOutput = AVAssetReaderTrackOutput(track: audioTrack, outputSettings: SamplesExtractor.outputSettings)
         assetReader.add(trackOutput)
         if let extracted = self._extract(samplesFrom: assetReader,asset:assetReader.asset,track:audioTrack, downsampledTo: desiredNumberOfSamples){
             switch assetReader.status {
@@ -183,7 +182,7 @@ public struct SamplesExtractor{
 
             //Clip to [noiseFloor, 0]
             var ceil: Float = 0.0
-            var noiseFloorFloat = SamplesExtractor._noiseFloor
+            var noiseFloorFloat = SamplesExtractor.noiseFloor
             vDSP_vclip(processingBuffer, 1, &noiseFloorFloat, &ceil, &processingBuffer, 1, sampleCount)
 
             //Downsample and average
@@ -204,7 +203,7 @@ public struct SamplesExtractor{
     }
 
     fileprivate static func _normalize(_ samples: [Float]) -> [Float] {
-        let noiseFloor = SamplesExtractor._noiseFloor
+        let noiseFloor = SamplesExtractor.noiseFloor
         return samples.map { $0 / noiseFloor }
     }
 
