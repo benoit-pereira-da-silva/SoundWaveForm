@@ -185,17 +185,27 @@ public struct SamplesExtractor{
                                          samplesPerPixel: samplesPerPixel,
                                          filter: filter)
                 }
-                onSuccess(outputSamples, sampleMax)
+                DispatchQueue.main.async {
+                    onSuccess(outputSamples, sampleMax)
+                }
                 return
 
             case .failed, .cancelled, .loading, .unknown:
-                onFailure(SamplesExtractorError.readingError(message: "could not load asset: \(error?.localizedDescription ?? "Unknown error" )"))
+                DispatchQueue.main.async {
+                    onFailure(SamplesExtractorError.readingError(message: "could not load asset: \(error?.localizedDescription ?? "Unknown error" )"))
+                }
             }
         }
 
     }
 
-    private static func _processSamples(fromData sampleBuffer: inout Data,  sampleMax: inout Float,  outputSamples: inout [Float], samplesToProcess: Int, downSampledLength: Int, samplesPerPixel: Int, filter: [Float]) {
+    private static func _processSamples( fromData sampleBuffer: inout Data,
+                                         sampleMax: inout Float,
+                                         outputSamples: inout [Float],
+                                         samplesToProcess: Int,
+                                         downSampledLength: Int,
+                                         samplesPerPixel: Int,
+                                         filter: [Float]){
         sampleBuffer.withUnsafeBytes { (samples: UnsafePointer<Int16>) in
 
             var processingBuffer = [Float](repeating: 0.0, count: samplesToProcess)

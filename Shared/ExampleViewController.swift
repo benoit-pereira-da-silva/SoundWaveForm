@@ -84,6 +84,9 @@ public class ExampleViewController: UniversalViewController {
                                             self.drawingDurationLabel.text = String(format:"%.3f s",drawingDuration)
                                         #endif
 
+
+
+
             }, onFailure: { error in
                 print("\(error)")
             })
