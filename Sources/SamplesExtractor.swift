@@ -20,11 +20,12 @@ import Foundation
 import Accelerate
 import AVFoundation
 
-enum SamplesExtractorError: Error {
+public enum SamplesExtractorError: Error {
     case assetNotFound
     case audioTrackNotFound
     case audioTrackMediaTypeMissMatch(mediatype: AVMediaType)
     case readingError(message: String)
+    case extractionHasFailed
 }
 
 
@@ -32,59 +33,86 @@ public struct SamplesExtractor{
 
     
     public fileprivate(set) static var outputSettings: [String : Any] = [
-            AVFormatIDKey: kAudioFormatLinearPCM,
-            AVLinearPCMBitDepthKey: 16,
-            AVLinearPCMIsBigEndianKey: false,
-            AVLinearPCMIsFloatKey: false,
-            AVLinearPCMIsNonInterleaved: false
+        AVFormatIDKey: kAudioFormatLinearPCM,
+        AVLinearPCMBitDepthKey: 16,
+        AVLinearPCMIsBigEndianKey: false,
+        AVLinearPCMIsFloatKey: false,
+        AVLinearPCMIsNonInterleaved: false
     ]
 
     public fileprivate(set) static var noiseFloor: Float = -50.0 // everything below -50 dB will be clipped
 
 
-    /// Samples a sound track 
+    /// Samples a sound track
     /// There is no guarantee you will obtain exactly the  desired number of samples
     /// You can compensate in your drawing logic
     ///
+    ///
     /// - Parameters:
-    ///   - audioTrack: the targetted audio track
-    ///   - timeRange: the sampling timeRange
+    ///   - audioTrack: the audio track
+    ///   - timeRange: the sampling timerange
     ///   - desiredNumberOfSamples: the desired number of samples
-    /// - Returns: the samples
-    /// - Throws: Preflight or sampling errors
-    public static func samples(audioTrack: AVAssetTrack, timeRange: CMTimeRange?, desiredNumberOfSamples: Int = 100) throws ->  (samples: [Float], sampleMax: Float) {
-
-        guard let asset = audioTrack.asset else {
-            throw SamplesExtractorError.assetNotFound
-        }
-        let assetReader = try AVAssetReader(asset: asset)
-        if let timeRange = timeRange{
-            assetReader.timeRange = timeRange
-        }
-
-        guard audioTrack.mediaType == .audio else {
-            throw SamplesExtractorError.audioTrackMediaTypeMissMatch(mediatype: audioTrack.mediaType)
-        }
-
-        let trackOutput = AVAssetReaderTrackOutput(track: audioTrack, outputSettings: SamplesExtractor.outputSettings)
-        assetReader.add(trackOutput)
-        if let extracted = self._extract(samplesFrom: assetReader,asset:assetReader.asset,track:audioTrack, downsampledTo: desiredNumberOfSamples){
-            switch assetReader.status {
-            case .completed:
-                let normalizedSamples = (samples:self._normalize(extracted.samples), sampleMax :extracted.sampleMax)
-                return normalizedSamples
-            default:
-                throw SamplesExtractorError.readingError(message:" reading waveform audio data has failed \(assetReader.status)")
+    ///   - onSuccess: the success handler with the samples and the sampleMax
+    ///   - onFailure: the failure handler with a contextual error
+    public static func samples( audioTrack: AVAssetTrack,
+                                timeRange: CMTimeRange?,
+                                desiredNumberOfSamples: Int = 100,
+                                onSuccess: @escaping (_ samples: [Float], _ sampleMax: Float)->(),
+                                onFailure: @escaping (_ error:Error)->()){
+        do{
+            guard let asset = audioTrack.asset else {
+                throw SamplesExtractorError.assetNotFound
             }
+            let assetReader = try AVAssetReader(asset: asset)
+            if let timeRange = timeRange{
+                assetReader.timeRange = timeRange
+            }
+
+            guard audioTrack.mediaType == .audio else {
+                throw SamplesExtractorError.audioTrackMediaTypeMissMatch(mediatype: audioTrack.mediaType)
+            }
+
+            let trackOutput = AVAssetReaderTrackOutput(track: audioTrack, outputSettings: SamplesExtractor.outputSettings)
+            assetReader.add(trackOutput)
+
+            SamplesExtractor._extract( samplesFrom: assetReader,
+                                       asset: assetReader.asset,
+                                       track: audioTrack,
+                                       downsampledTo: desiredNumberOfSamples,
+                                       onSuccess: {samples, sampleMax in
+                                        switch assetReader.status {
+                                        case .completed:
+                                            onSuccess(self._normalize(samples),sampleMax)
+                                        default:
+                                            onFailure(SamplesExtractorError.readingError(message:" reading waveform audio data has failed \(assetReader.status)"))
+                                        }
+            }, onFailure: { error in
+                onFailure(error)
+            })
+
+        }catch{
+            onFailure(error)
         }
-        throw SamplesExtractorError.readingError(message:"Extraction failed")
     }
 
 
-    fileprivate static func _extract(samplesFrom reader: AVAssetReader, asset: AVAsset, track:AVAssetTrack,  downsampledTo desiredNumberOfSamples: Int) ->  (samples: [Float], sampleMax: Float)? {
-        if let audioFormatDesc = track.formatDescriptions.first {
-            let item = audioFormatDesc as! CMAudioFormatDescription     // TODO: Can this be safer?
-            if let asbd = CMAudioFormatDescriptionGetStreamBasicDescription(item) {
+    fileprivate static func _extract( samplesFrom reader: AVAssetReader,
+                                      asset: AVAsset,
+                                      track:AVAssetTrack,
+                                      downsampledTo desiredNumberOfSamples: Int,
+                                      onSuccess: @escaping (_ samples: [Float], _ sampleMax: Float)->(),
+                                      onFailure: @escaping (_ error:Error)->()){
+
+        asset.loadValuesAsynchronously(forKeys: ["duration"]) {
+            var error: NSError?
+            let status = asset.statusOfValue(forKey: "duration", error: &error)
+            switch status {
+            case .loaded:
+                guard
+                    let formatDescriptions = track.formatDescriptions as? [CMAudioFormatDescription],
+                    let audioFormatDesc = formatDescriptions.first,
+                    let asbd = CMAudioFormatDescriptionGetStreamBasicDescription(audioFormatDesc)
+                    else { break }
 
                 var sampleMax:Float = -Float.infinity
 
@@ -132,12 +160,12 @@ public struct SamplesExtractor{
                     guard samplesToProcess > 0 else { continue }
 
                     self._processSamples(fromData: &sampleBuffer,
-                                        sampleMax: &sampleMax,
-                                   outputSamples: &outputSamples,
-                                   samplesToProcess: samplesToProcess,
-                                   downSampledLength: downSampledLength,
-                                   samplesPerPixel: samplesPerPixel,
-                                   filter: filter)
+                                         sampleMax: &sampleMax,
+                                         outputSamples: &outputSamples,
+                                         samplesToProcess: samplesToProcess,
+                                         downSampledLength: downSampledLength,
+                                         samplesPerPixel: samplesPerPixel,
+                                         filter: filter)
                 }
 
 
@@ -150,17 +178,21 @@ public struct SamplesExtractor{
                     let filter = [Float](repeating: 1.0 / Float(samplesPerPixel), count: samplesPerPixel)
 
                     self._processSamples(fromData: &sampleBuffer,
-                                        sampleMax: &sampleMax,
-                                        outputSamples: &outputSamples,
-                                   samplesToProcess: samplesToProcess,
-                                   downSampledLength: downSampledLength,
-                                   samplesPerPixel: samplesPerPixel,
-                                   filter: filter)
+                                         sampleMax: &sampleMax,
+                                         outputSamples: &outputSamples,
+                                         samplesToProcess: samplesToProcess,
+                                         downSampledLength: downSampledLength,
+                                         samplesPerPixel: samplesPerPixel,
+                                         filter: filter)
                 }
-                return (samples: outputSamples, sampleMax: sampleMax)
+                onSuccess(outputSamples, sampleMax)
+                return
+
+            case .failed, .cancelled, .loading, .unknown:
+                onFailure(SamplesExtractorError.readingError(message: "could not load asset: \(error?.localizedDescription ?? "Unknown error" )"))
             }
         }
-        return nil
+
     }
 
     private static func _processSamples(fromData sampleBuffer: inout Data,  sampleMax: inout Float,  outputSamples: inout [Float], samplesToProcess: Int, downSampledLength: Int, samplesPerPixel: Int, filter: [Float]) {
