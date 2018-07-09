@@ -68,10 +68,10 @@ if let track:AVAssetTrack = audioTracks.first{
 		SamplesExtractor.samples(audioTrack: track,
 				timeRange:timeRange,
 				desiredNumberOfSamples: 500,
-				onSuccess:{ samples, sampleMax in
+				onSuccess:{ samples, sampleMax, id in
 					... // Proceeed
 				},
-				onFailure: { error in 
+				onFailure: { error, id in 
 					... // Handle the error
 				}
 		)
