@@ -51,11 +51,10 @@ public class ExampleViewController: UniversalViewController {
             SamplesExtractor.samples(audioTrack: track,
                                      timeRange: timeRange,
                                      desiredNumberOfSamples: width,
-                                     onSuccess: { a,b in
-                                        let sampling = (samples: a, sampleMax: b)
+                                     onSuccess: { s, sMax, _ in
+                                        let sampling = (samples: s, sampleMax: sMax)
 
                                         let samplingDuration = CFAbsoluteTimeGetCurrent() - samplingStartTime
-
 
                                         // Image Drawing
                                         // Let's draw the sample into an image.
@@ -87,8 +86,8 @@ public class ExampleViewController: UniversalViewController {
 
 
 
-            }, onFailure: { error in
-                print("\(error)")
+            }, onFailure: { error, id in
+                print("\(id ?? "") \(error)")
             })
         }
 

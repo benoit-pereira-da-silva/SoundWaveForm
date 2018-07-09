@@ -54,11 +54,13 @@ public struct SamplesExtractor{
     ///   - desiredNumberOfSamples: the desired number of samples
     ///   - onSuccess: the success handler with the samples and the sampleMax
     ///   - onFailure: the failure handler with a contextual error
+    ///   - identifiedBy: an optional identifier to be used to support multiple consumers.
     public static func samples( audioTrack: AVAssetTrack,
                                 timeRange: CMTimeRange?,
                                 desiredNumberOfSamples: Int = 100,
-                                onSuccess: @escaping (_ samples: [Float], _ sampleMax: Float)->(),
-                                onFailure: @escaping (_ error:Error)->()){
+                                onSuccess: @escaping (_ samples: [Float], _ sampleMax: Float,_ identifier: String?)->(),
+                                onFailure: @escaping (_ error:Error,_ identifier: String?)->(),
+                                identifiedBy: String? = nil){
         do{
             guard let asset = audioTrack.asset else {
                 throw SamplesExtractorError.assetNotFound
@@ -82,16 +84,16 @@ public struct SamplesExtractor{
                                        onSuccess: {samples, sampleMax in
                                         switch assetReader.status {
                                         case .completed:
-                                            onSuccess(self._normalize(samples),sampleMax)
+                                            onSuccess(self._normalize(samples), sampleMax, identifiedBy)
                                         default:
-                                            onFailure(SamplesExtractorError.readingError(message:" reading waveform audio data has failed \(assetReader.status)"))
+                                            onFailure(SamplesExtractorError.readingError(message:" reading waveform audio data has failed \(assetReader.status)"), identifiedBy)
                                         }
             }, onFailure: { error in
-                onFailure(error)
+                onFailure(error, identifiedBy)
             })
 
         }catch{
-            onFailure(error)
+            onFailure(error,identifiedBy)
         }
     }
 

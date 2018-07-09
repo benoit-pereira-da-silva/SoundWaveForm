@@ -37,12 +37,12 @@ let configuration = WaveformConfiguration( size: waveFormView.bounds.size,
 SamplesExtractor.samples(audioTrack: track,
         timeRange: nil,
         desiredNumberOfSamples: 500,
-        onSuccess:{ samples, sampleMax in
+        onSuccess:{ samples, sampleMax, id in
         	// Let's display the waveform in a view                     
 			self.waveFormView.image = WaveFormDrawer.image(from: samples, with: configuration)
         },
-        onFailure: { error in 
-            ... // Handle the error
+        onFailure: { error, id in 
+            ... // Handle the error e.g: print("\(id ?? "") \(error)")
         }
 )
 
