@@ -179,19 +179,21 @@ open class WaveFormDrawer {
         }
         #elseif os(iOS)
         UIGraphicsBeginImageContextWithOptions(configuration.size, false, configuration.scale)
-        let context = UIGraphicsGetCurrentContext()!
-        context.setAllowsAntialiasing(true)
-        context.setShouldAntialias(true)
-        self._drawBackground(on: context, with: configuration)
-        context.saveGState()
-        self._drawGraph(from: sampling, on: context, with: configuration)
-        context.restoreGState()
-        if configuration.borderWidth > 0 {
-            self._drawBorder(on: context, with: configuration)
+        if let context = UIGraphicsGetCurrentContext(){
+            context.setAllowsAntialiasing(true)
+            context.setShouldAntialias(true)
+            self._drawBackground(on: context, with: configuration)
+            context.saveGState()
+            self._drawGraph(from: sampling, on: context, with: configuration)
+            context.restoreGState()
+            if configuration.borderWidth > 0 {
+                self._drawBorder(on: context, with: configuration)
+            }
+            let graphImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            return graphImage
         }
-        let graphImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return graphImage
+        return nil
         #endif
     }
 
