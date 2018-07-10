@@ -14,34 +14,34 @@ import AVFoundation
 // MARK : - OSX & iOS compatibilty
 
 #if os(OSX)
-    import AppKit
+import AppKit
 
-    public typealias WaveImage = NSImage
-    public typealias WaveColor = NSColor
-    public var mainScreenScale:CGFloat = 1
+public typealias WaveImage = NSImage
+public typealias WaveColor = NSColor
+public var mainScreenScale:CGFloat = 1
 
 #elseif os(iOS)
 
-    import UIKit
+import UIKit
 
-    public typealias WaveImage = UIImage
-    public typealias WaveColor = UIColor
-    public var mainScreenScale = UIScreen.main.scale
+public typealias WaveImage = UIImage
+public typealias WaveColor = UIColor
+public var mainScreenScale = UIScreen.main.scale
 
-    extension WaveColor {
+extension WaveColor {
 
-        // Cocoa Touch to Cocoa adaptation
-        func highlight(withLevel: CGFloat) -> WaveColor? {
-            var hue: CGFloat = 0.0, saturation: CGFloat = 0.0, brightness: CGFloat = 0.0, alpha: CGFloat = 0.0
-            self.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
-            let brightnessAdjustment: CGFloat = withLevel
-            let adjustmentModifier: CGFloat = brightness < brightnessAdjustment ? 1 : -1
-            let newBrightness = brightness + brightnessAdjustment * adjustmentModifier
-            return WaveColor(hue: hue, saturation: saturation, brightness: newBrightness, alpha: alpha)
-        }
+    // Cocoa Touch to Cocoa adaptation
+    func highlight(withLevel: CGFloat) -> WaveColor? {
+        var hue: CGFloat = 0.0, saturation: CGFloat = 0.0, brightness: CGFloat = 0.0, alpha: CGFloat = 0.0
+        self.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
+        let brightnessAdjustment: CGFloat = withLevel
+        let adjustmentModifier: CGFloat = brightness < brightnessAdjustment ? 1 : -1
+        let newBrightness = brightness + brightnessAdjustment * adjustmentModifier
+        return WaveColor(hue: hue, saturation: saturation, brightness: newBrightness, alpha: alpha)
     }
+}
 
-    
+
 #endif
 
 
@@ -114,7 +114,7 @@ public struct WaveformConfiguration {
                 borderWidth:CGFloat = 0,
                 borderColor:WaveColor = WaveColor.white,
                 paddingFactor: CGFloat? = nil
-             ) {
+        ) {
         self.color = color
         self.backgroundColor = backgroundColor
         self.style = style
@@ -134,30 +134,30 @@ open class WaveFormDrawer {
 
     public static func image(with sampling:(samples: [Float], sampleMax: Float) , and configuration: WaveformConfiguration) -> WaveImage? {
         #if os(OSX)
-            if let context = NSGraphicsContext.current{
-                // Let's use an Image
-                let image = NSImage(size: configuration.size)
-                image.lockFocus()
-                context.shouldAntialias = true
-                self._drawBackground(on: context.cgContext, with: configuration)
-                self._drawGraph(from: sampling, on: context.cgContext, with: configuration)
-                if configuration.borderWidth > 0 {
-                    self._drawBorder(on: context.cgContext, with: configuration)
-                }
-                return image
-            }else{
-                // Let's draw Off screen
-                NSGraphicsContext.saveGraphicsState()
-                let rep = NSBitmapImageRep(bitmapDataPlanes: nil,
-                                           pixelsWide: Int(configuration.size.width),
-                                           pixelsHigh: Int(configuration.size.height),
-                                           bitsPerSample: 8,
-                                           samplesPerPixel: 4,
-                                           hasAlpha: true,
-                                           isPlanar: false,
-                                           colorSpaceName: NSColorSpaceName.calibratedRGB,
-                                           bytesPerRow: 4  * Int(configuration.size.width),
-                                           bitsPerPixel: 32)!
+        if let context = NSGraphicsContext.current{
+            // Let's use an Image
+            let image = NSImage(size: configuration.size)
+            image.lockFocus()
+            context.shouldAntialias = true
+            self._drawBackground(on: context.cgContext, with: configuration)
+            self._drawGraph(from: sampling, on: context.cgContext, with: configuration)
+            if configuration.borderWidth > 0 {
+                self._drawBorder(on: context.cgContext, with: configuration)
+            }
+            return image
+        }else{
+            // Let's draw Off screen
+            NSGraphicsContext.saveGraphicsState()
+            if let rep = NSBitmapImageRep(bitmapDataPlanes: nil,
+                                          pixelsWide: Int(configuration.size.width),
+                                          pixelsHigh: Int(configuration.size.height),
+                                          bitsPerSample: 8,
+                                          samplesPerPixel: 4,
+                                          hasAlpha: true,
+                                          isPlanar: false,
+                                          colorSpaceName: NSColorSpaceName.calibratedRGB,
+                                          bytesPerRow: 4  * Int(configuration.size.width),
+                                          bitsPerPixel: 32){
                 NSGraphicsContext.current = NSGraphicsContext(bitmapImageRep: rep)
                 let context = NSGraphicsContext.current!
                 context.shouldAntialias = true
@@ -173,22 +173,25 @@ open class WaveFormDrawer {
                 image.addRepresentation(rep)
                 NSGraphicsContext.restoreGraphicsState()
                 return image
+
             }
+            return nil
+        }
         #elseif os(iOS)
-            UIGraphicsBeginImageContextWithOptions(configuration.size, false, configuration.scale)
-            let context = UIGraphicsGetCurrentContext()!
-            context.setAllowsAntialiasing(true)
-            context.setShouldAntialias(true)
-            self._drawBackground(on: context, with: configuration)
-            context.saveGState()
-            self._drawGraph(from: sampling, on: context, with: configuration)
-            context.restoreGState()
-            if configuration.borderWidth > 0 {
-                self._drawBorder(on: context, with: configuration)
-            }
-            let graphImage = UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
-            return graphImage
+        UIGraphicsBeginImageContextWithOptions(configuration.size, false, configuration.scale)
+        let context = UIGraphicsGetCurrentContext()!
+        context.setAllowsAntialiasing(true)
+        context.setShouldAntialias(true)
+        self._drawBackground(on: context, with: configuration)
+        context.saveGState()
+        self._drawGraph(from: sampling, on: context, with: configuration)
+        context.restoreGState()
+        if configuration.borderWidth > 0 {
+            self._drawBorder(on: context, with: configuration)
+        }
+        let graphImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return graphImage
         #endif
     }
 
@@ -214,8 +217,8 @@ open class WaveFormDrawer {
 
 
     private static func _drawGraph(from sampling:(samples: [Float], sampleMax: Float),
-                           on context: CGContext,
-                           with configuration: WaveformConfiguration) {
+                                   on context: CGContext,
+                                   with configuration: WaveformConfiguration) {
         let graphRect = CGRect(origin: CGPoint.zero, size: configuration.size)
         let graphCenter = graphRect.size.height / 2.0
         let positionAdjustedGraphCenter = graphCenter + CGFloat(configuration.position.rawValue) * graphCenter
@@ -235,10 +238,10 @@ open class WaveFormDrawer {
             maxAmplitude = max(drawingAmplitude, maxAmplitude)
             switch configuration.style {
             case .striped(let period):
-                  if (Int(xPos) % period == 0) {
+                if (Int(xPos) % period == 0) {
                     path.move(to: CGPoint(x: xPos, y: drawingAmplitudeUp))
                     path.addLine(to: CGPoint(x: xPos, y: drawingAmplitudeDown))
-                  }
+                }
             default:
                 path.move(to: CGPoint(x: xPos, y: drawingAmplitudeUp))
                 path.addLine(to: CGPoint(x: xPos, y: drawingAmplitudeDown))
