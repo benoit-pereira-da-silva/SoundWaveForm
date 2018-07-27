@@ -105,6 +105,11 @@ public struct WaveformConfiguration {
     /// Optional padding or vertical shrinking factor for the waveform.
     let paddingFactor: CGFloat?
 
+    // Draw a central line (used to represent the current time position)
+    public var drawCentraLine: Bool = false
+    public var centralLineWidth: CGFloat = 2 // The width of the central line
+    public var centralLineColor: WaveColor = WaveColor.red // Its color
+
     public init(size: CGSize,
                 color: WaveColor = WaveColor.red,
                 backgroundColor: WaveColor = WaveColor.clear,
@@ -144,6 +149,7 @@ open class WaveFormDrawer {
             if configuration.borderWidth > 0 {
                 self._drawBorder(on: context.cgContext, with: configuration)
             }
+             self._drawTheCentralLine(on: context.cgContext, with: configuration)
             return image
         }else{
             // Let's draw Off screen
@@ -168,7 +174,7 @@ open class WaveFormDrawer {
                 if configuration.borderWidth > 0 {
                     self._drawBorder(on: context.cgContext, with: configuration)
                 }
-
+                self._drawTheCentralLine(on: context.cgContext, with: configuration)
                 let image = NSImage(size: configuration.size)
                 image.addRepresentation(rep)
                 NSGraphicsContext.restoreGraphicsState()
@@ -189,6 +195,7 @@ open class WaveFormDrawer {
             if configuration.borderWidth > 0 {
                 self._drawBorder(on: context, with: configuration)
             }
+            self._drawTheCentralLine(on: context, with: configuration)
             let graphImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
             return graphImage
@@ -217,6 +224,19 @@ open class WaveFormDrawer {
         context.drawPath(using: CGPathDrawingMode.stroke)
     }
 
+
+    private static func _drawTheCentralLine(on context: CGContext, with configuration: WaveformConfiguration){
+        guard configuration.drawCentraLine else { return }
+        let path = CGMutablePath()
+        let startingPoint = CGPoint(x: (CGFloat(context.width) / 2) - configuration.centralLineWidth, y: 0)
+        let endPoint =  CGPoint(x: startingPoint.x , y: CGFloat(context.height))
+        context.setStrokeColor(configuration.centralLineColor.cgColor)
+        context.setLineWidth(configuration.centralLineWidth)
+        path.move(to: startingPoint)
+        path.addLine(to: endPoint)
+        context.addPath(path)
+        context.drawPath(using: CGPathDrawingMode.stroke)
+    }
 
     private static func _drawGraph(from sampling:(samples: [Float], sampleMax: Float),
                                    on context: CGContext,
