@@ -196,6 +196,10 @@ public struct SamplesExtractor{
                 DispatchQueue.main.async {
                     onFailure(SamplesExtractorError.readingError(message: "could not load asset: \(error?.localizedDescription ?? "Unknown error" )"))
                 }
+            @unknown default:
+              DispatchQueue.main.async {
+                    onFailure(SamplesExtractorError.readingError(message: "could not load asset unsupported error: \(error?.localizedDescription ?? "" )"))
+                }
             }
         }
 
