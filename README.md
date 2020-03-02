@@ -1,5 +1,5 @@
 
-[![Swift 4](https://img.shields.io/badge/Swift-4.x-orange.svg)](https://swift.org)  [![Platform](https://img.shields.io/badge/platforms-macOS%20∙%20iOS%20-blue.svg)](https://developer.apple.com/platforms/) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Swift 4](https://img.shields.io/badge/Swift-5.x-orange.svg)](https://swift.org)  [![Platform](https://img.shields.io/badge/platforms-macOS%20∙%20iOS%20-blue.svg)](https://developer.apple.com/platforms/) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 
 # SoundWaveForm
@@ -12,7 +12,7 @@ Allows to extract sound samples from Video or Sounds files very efficiently (it 
 - iOS 8 & + 
 - swift 5.x 
 - if you need to support swift 4 use [v3.0.2](https://github.com/benoit-pereira-da-silva/SoundWaveForm/releases/tag/v3.0.2)
-- if you need to support swift 3 use the [v2.0.1](https://github.com/benoit-pereira-da-silva/SoundWaveForm/releases/tag/v2.0.1))
+- if you need to support swift 3 use the [v2.0.1](https://github.com/benoit-pereira-da-silva/SoundWaveForm/releases/tag/v2.0.1)
 
 # Screen Shots
 
