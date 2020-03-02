@@ -1,5 +1,5 @@
 
-[![Swift 4](https://img.shields.io/badge/Swift-5.x-orange.svg)](https://swift.org)  [![Platform](https://img.shields.io/badge/platforms-macOS%20∙%20iOS%20-blue.svg)](https://developer.apple.com/platforms/) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Swift 5](https://img.shields.io/badge/Swift-5.x-orange.svg)](https://swift.org)  [![Platform](https://img.shields.io/badge/platforms-macOS%20∙%20iOS%20-blue.svg)](https://developer.apple.com/platforms/) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 
 # SoundWaveForm
