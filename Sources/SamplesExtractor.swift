@@ -120,8 +120,8 @@ public struct SamplesExtractor{
 
                 // By default the reader's timerange is set to CMTimeRangeMake(kCMTimeZero, kCMTimePositiveInfinity)
                 // So if duration == kCMTimePositiveInfinity we should use the asset duration
-                let duration:Double = (reader.timeRange.duration == kCMTimePositiveInfinity) ? Double(asset.duration.value) : Double(reader.timeRange.duration.value)
-                let timscale:Double = (reader.timeRange.duration == kCMTimePositiveInfinity) ? Double(asset.duration.timescale) :Double(reader.timeRange.start.timescale)
+                let duration:Double = (reader.timeRange.duration == CMTime.positiveInfinity) ? Double(asset.duration.value) : Double(reader.timeRange.duration.value)
+                let timscale:Double = (reader.timeRange.duration == CMTime.positiveInfinity) ? Double(asset.duration.timescale) :Double(reader.timeRange.start.timescale)
 
                 let numOfTotalSamples = (asbd.pointee.mSampleRate) * duration / timscale
 
@@ -151,7 +151,7 @@ public struct SamplesExtractor{
                     // Append audio sample buffer into our current sample buffer
                     var readBufferLength = 0
                     var readBufferPointer: UnsafeMutablePointer<Int8>?
-                    CMBlockBufferGetDataPointer(readBuffer, 0, &readBufferLength, nil, &readBufferPointer)
+                    CMBlockBufferGetDataPointer(readBuffer, atOffset: 0, lengthAtOffsetOut: &readBufferLength, totalLengthOut: nil, dataPointerOut: &readBufferPointer)
                     sampleBuffer.append(UnsafeBufferPointer(start: readBufferPointer, count: readBufferLength))
                     CMSampleBufferInvalidate(readSampleBuffer)
 
