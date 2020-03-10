@@ -6,8 +6,8 @@
 //
 //  https://github.com/fulldecent/FDWaveformView
 //  https://github.com/dmrschmidt/DSWaveformImage
-//  ... 
-//  
+//  ...
+//
 //  - added supports iOS & macOS
 //  - ability to setup a timeRange to restrict automatically the zone of interest.
 //  - improved performance
@@ -31,7 +31,7 @@ public enum SamplesExtractorError: Error {
 
 public struct SamplesExtractor{
 
-    
+
     public fileprivate(set) static var outputSettings: [String : Any] = [
         AVFormatIDKey: kAudioFormatLinearPCM,
         AVLinearPCMBitDepthKey: 16,
