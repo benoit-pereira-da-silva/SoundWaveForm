@@ -116,12 +116,19 @@ public struct SamplesExtractor{
                     let asbd = CMAudioFormatDescriptionGetStreamBasicDescription(audioFormatDesc)
                     else { break }
 
+
                 var sampleMax:Float = -Float.infinity
+
+                #if os(OSX)
+                let positiveInfinity = kCMTimePositiveInfinity
+                #else
+                let positiveInfinity = CMTime.positiveInfinity
+                #endif
 
                 // By default the reader's timerange is set to CMTimeRangeMake(kCMTimeZero, kCMTimePositiveInfinity)
                 // So if duration == kCMTimePositiveInfinity we should use the asset duration
-                let duration:Double = (reader.timeRange.duration == CMTime.positiveInfinity) ? Double(asset.duration.value) : Double(reader.timeRange.duration.value)
-                let timscale:Double = (reader.timeRange.duration == CMTime.positiveInfinity) ? Double(asset.duration.timescale) :Double(reader.timeRange.start.timescale)
+                let duration:Double = (reader.timeRange.duration == positiveInfinity) ? Double(asset.duration.value) : Double(reader.timeRange.duration.value)
+                let timscale:Double = (reader.timeRange.duration == positiveInfinity) ? Double(asset.duration.timescale) :Double(reader.timeRange.start.timescale)
 
                 let numOfTotalSamples = (asbd.pointee.mSampleRate) * duration / timscale
 
@@ -150,11 +157,17 @@ public struct SamplesExtractor{
 
                     // Append audio sample buffer into our current sample buffer
                     var readBufferLength = 0
+                    #if os(OSX)
+                    var readBufferPointer: UnsafeMutablePointer<Int8>?
+                    CMBlockBufferGetDataPointer(readBuffer, 0, &readBufferLength, nil, &readBufferPointer)
+                    sampleBuffer.append(UnsafeBufferPointer(start: readBufferPointer, count: readBufferLength))
+                    CMSampleBufferInvalidate(readSampleBuffer)
+                    #else
                     var readBufferPointer: UnsafeMutablePointer<Int8>?
                     CMBlockBufferGetDataPointer(readBuffer, atOffset: 0, lengthAtOffsetOut: &readBufferLength, totalLengthOut: nil, dataPointerOut: &readBufferPointer)
                     sampleBuffer.append(UnsafeBufferPointer(start: readBufferPointer, count: readBufferLength))
                     CMSampleBufferInvalidate(readSampleBuffer)
-
+                    #endif
                     let totalSamples = sampleBuffer.count / MemoryLayout<Int16>.size
                     let downSampledLength = (totalSamples / samplesPerPixel)
                     let samplesToProcess = downSampledLength * samplesPerPixel
