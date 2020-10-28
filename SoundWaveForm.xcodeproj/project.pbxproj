@@ -133,6 +133,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E5727E372549C48100387730 /* SoundWaveForm */ = {
+			isa = PBXGroup;
+			children = (
+				E5B0ED8A1F238C44005D1A58 /* SamplesExtractor.swift */,
+				E5B0ED8E1F239050005D1A58 /* WaveFormDrawer.swift */,
+			);
+			path = SoundWaveForm;
+			sourceTree = "<group>";
+		};
 		E5732E261F25EA0A0077642B /* Shared */ = {
 			isa = PBXGroup;
 			children = (
@@ -211,8 +220,7 @@
 		E5B0ED891F238C24005D1A58 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				E5B0ED8A1F238C44005D1A58 /* SamplesExtractor.swift */,
-				E5B0ED8E1F239050005D1A58 /* WaveFormDrawer.swift */,
+				E5727E372549C48100387730 /* SoundWaveForm */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
