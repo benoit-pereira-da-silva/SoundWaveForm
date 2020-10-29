@@ -81,12 +81,11 @@ if let track:AVAssetTrack = audioTracks.first{
 }
 ```
 
-## Installation via Carthage
-
-Add to your Cartfile : ` github "benoit-pereira-da-silva/SoundWaveForm"` 
-
+## Installation
+- Via SPM: add `https://github.com/benoit-pereira-da-silva/SoundWaveForm`
+- Via Carthage: Add to your Cartfile  ` github "benoit-pereira-da-silva/SoundWaveForm"` 
+- Copy the two source files : `Sources/SoundWaveForm/` 
 
 ## Inspiration
-
 This project has been largely inspired by [FDWaveformView](https://github.com/fulldecent/FDWaveformView) and [DSWaveformImage](https://github.com/dmrschmidt/DSWaveformImage). Thanks to William aka [@fulldecent](https://github.com/fulldecent/) and Daniel [@dmrschmidt](https://github.com/dmrschmidt/).
 	
